@@ -1,29 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wearapay.scandemo.MainActivity"
+    android:fitsSystemWindows="true"
     >
-
-  <TextView
-      android:id="@+id/sample_text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hello World!"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      />
-
-  <Button
-      android:id="@+id/open"
+  <android.support.design.widget.AppBarLayout
+      android:id="@+id/appbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="open"
-      />
+      android:fitsSystemWindows="true"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        >
 
-</android.support.constraint.ConstraintLayout>
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="44dp"
+          android:fitsSystemWindows="true"
+          >
+        <include layout="@layout/title_view"/>
+      </FrameLayout>
+    </LinearLayout>
+
+  </android.support.design.widget.AppBarLayout>
+
+  <android.support.constraint.ConstraintLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      >
+    <TextView
+        android:id="@+id/sample_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        />
+
+    <Button
+        android:id="@+id/open"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="open"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="27dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        />
+
+  </android.support.constraint.ConstraintLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
+
+
+
