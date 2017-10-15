@@ -9,12 +9,16 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import butterknife.ButterKnife;
+
 import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
+import com.wearapay.scandemo.R;
 import com.wearapay.scandemo.utils.AppUtils;
 import com.wearapay.scandemo.utils.StatusBarCompat;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by lyz on 2017/6/27.
@@ -22,10 +26,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public abstract class BaseActivity extends RxFragmentActivity {
 
   public int getStatusColor() {
-    return color;
+    return getResources().getColor(color);
   }
 
-  protected int color = 0x20000000;
+  protected int color = R.color.status_bar_bg;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

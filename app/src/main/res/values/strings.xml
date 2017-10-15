@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">NDKDemo</string>
+    <string name="message_double_confirm_logout">再按一次退出程序</string>
 </resources>

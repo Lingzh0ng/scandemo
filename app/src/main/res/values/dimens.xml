@@ -5,4 +5,19 @@
   <dimen name="detail_backdrop_height">320dp</dimen>
   <dimen name="rounded_corner_button_radius">3dp</dimen>
   <dimen name="picker_dialog_margin_lr">30dp</dimen>
+
+  <dimen name="cell_height_half">22dp</dimen>
+  <dimen name="cell_height">44dp</dimen>
+  <dimen name="cell_height_2">80dp</dimen>
+
+  <dimen name="text_size_extra_small">12sp</dimen>
+  <dimen name="text_size_small">14sp</dimen>
+  <dimen name="text_size_normal">16sp</dimen>
+  <dimen name="text_size_large">18sp</dimen>
+  <dimen name="text_size_extra_large">20sp</dimen>
+  <dimen name="text_size_max">22sp</dimen>
+  <dimen name="dialog_bg_corner">10dp</dimen>
+  <dimen name="separator_margin_left">20dp</dimen>
+  <dimen name="separator_size">0.5dp</dimen>
+  <dimen name="round_dot_size">6dp</dimen>
 </resources>

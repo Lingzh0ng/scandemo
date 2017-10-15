@@ -20,8 +20,9 @@
       android:layout_height="match_parent"
       android:layout_weight="1"
       android:gravity="center_vertical"
+      android:textSize="16sp"
       android:maxLines="2"
-      android:textColor="@android:color/black"
+      android:textColor="@android:color/white"
       />
   <ImageView
       android:id="@+id/ivMenu"

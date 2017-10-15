@@ -25,6 +25,12 @@
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:screenOrientation="portrait"
         android:windowSoftInputMode="stateHidden|adjustPan"/>
+
+    <activity
+        android:name=".module.home.HomeActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden|adjustPan"/>
   </application>
 
 </manifest>

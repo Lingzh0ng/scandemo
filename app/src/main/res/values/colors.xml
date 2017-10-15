@@ -4,5 +4,37 @@
   <color name="colorPrimaryDark">#303F9F</color>
   <color name="colorAccent">#FF4081</color>
   <color name="progress_dialog_bg">#11111111</color>
-  <color name="test_color">#723456</color>
+  <color name="test_color">#ff723456</color>
+
+  <color name="white">#FFFFFFFF</color>
+  <color name="white_2">#99FFFFFF</color>
+  <color name="white_3">#CCFFFFFF</color>
+  <color name="blue1">#99CCF8</color>
+  <color name="blue2">#088AFF</color>
+  <color name="blue3">#077CE6</color>
+
+  <color name="rippelColor">#0099CC</color>
+  <color name="cell_bg_color">@color/white</color>
+
+  <color name="light_gray">#D2D2D2</color>
+  <color name="median_gray">#CCCCCC</color>
+  <color name="gray_circle">#cdcdcd</color>
+  <color name="blue_circle">#007aff</color>
+  <color name="light_blue">#007AFF</color>
+  <color name="pattern_path_red">#f1275a</color>
+
+  <color name="primary">#EC7421</color>
+  <color name="secondary">#EC7421</color>
+  <color name="light">#F09858</color>
+  <color name="highlight">#ED6A10</color>
+  <color name="primary_bg">#EAEAEA</color>
+  <color name="text_color_primary">#FF4c4c4c</color>
+  <color name="text_color_secondary">#FF808080</color>
+  <color name="text_color_disabled">#FFAAAAAA</color>
+
+  <color name="action_bar">@color/white</color>
+  <color name="action_bar_2">#CCFFFFFF</color>
+  <color name="status_bar_bg">#30000000</color>
+  <color name="shade_text_bg">#4D000000</color>
+  <color name="shade_cover_window">#80000000</color>
 </resources>

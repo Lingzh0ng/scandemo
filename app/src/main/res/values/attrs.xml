@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <attr format="reference" name="attrPPCustomActionBarStyleRef"/>
+
+  <declare-styleable name="PPCustomActionBar">
+    <attr format="dimension" name="pp_cab_status_bar_height"/>
+    <attr format="boolean" name="pp_cab_transparent"/>
+    <attr format="string" name="pp_cab_title"/>
+    <attr format="color" name="pp_cab_title_color"/>
+    <attr format="color" name="pp_btn_right_text_color"/>
+    <attr format="dimension" name="pp_cab_title_size"/>
+    <attr format="string" name="pp_cab_txt"/>
+    <attr format="dimension" name="pp_cab_txt_size"/>
+    <attr format="dimension" name="pp_cab_title_margin"/>
+    <attr format="boolean" name="pp_cab_back_visible"/>
+    <attr format="boolean" name="pp_cab_menu_visible"/>
+    <attr format="integer" name="pp_cab_back_icon"/>
+    <attr format="integer" name="pp_cab_menu_icon"/>
+    <attr format="integer" name="pp_cab_menu_color"/>
+    <attr format="string" name="pp_cab_right2_title"/>
+    <attr format="boolean" name="pp_cab_right2_visible"/>
+  </declare-styleable>
+
+  <declare-styleable name="FancyIndexer">
+    <attr format="dimension" name="fi_widthOffset"/>
+    <attr format="integer" name="fi_minFontSize"/>
+    <attr format="integer" name="fi_maxFontSize"/>
+    <attr format="integer" name="fi_tipFontSize"/>
+    <attr format="dimension" name="fi_maxBezierHeight"/>
+    <attr format="dimension" name="fi_maxBezierWidth"/>
+    <attr format="integer" name="fi_maxBezierLines"/>
+    <attr format="dimension" name="fi_additionalTipOffset"/>
+    <attr format="dimension" name="fi_singleHeight"/>
+    <attr format="color" name="fi_fontColor"/>
+    <attr format="color" name="fi_tipFontColor"/>
+  </declare-styleable>
+
+  <attr name="forward_visible_status">
+    <enum name="visible" value="0"/>
+    <enum name="invisible" value="1"/>
+    <enum name="gone" value="2"/>
+  </attr>
+
+  <attr format="integer" name="cell_edit_text_style"/>
+  <attr format="string" name="cell_hint"/>
+  <attr format="color" name="cell_value_color"/>
+  <attr format="dimension" name="cell_title_width"/>
+  <attr format="string" name="cell_title"/>
+  <attr format="string" name="cell_sub_title"/>
+  <attr format="boolean" name="cell_title_visible"/>
+  <attr format="color" name="cell_title_color"/>
+  <attr format="dimension" name="cell_title_size"/>
+  <attr format="reference" name="cell_title_icon"/>
+  <attr format="dimension" name="cell_value_size"/>
+  <attr format="dimension" name="cell_text_margin_left"/>
+  <attr format="dimension" name="cell_text_margin_right"/>
+  <attr format="reference" name="cell_icon"/>
+  <attr format="reference" name="cell_image"/>
+  <attr format="dimension" name="cell_icon_size"/>
+  <attr format="dimension" name="cell_image_size"/>
+  <attr format="dimension" name="cell_padding_left"/>
+  <attr format="dimension" name="cell_padding_right"/>
+  <attr format="boolean" name="cell_password"/>
+  <attr format="boolean" name="cell_editable"/>
+  <attr format="dimension" name="cell_title_padding_left"/>
+  <attr format="dimension" name="cell_subtitle_padding_right"/>
+  <attr format="integer" name="cell_avatar_img"/>
+  <attr format="dimension" name="cell_avatar_img_size"/>
+  <attr format="boolean" name="cell_avatar_img_rounded"/>
+
+  <declare-styleable name="PPLockView">
+    <attr format="reference" name="lockview_default_circle"/>
+    <attr format="reference" name="lockview_select_circle"/>
+    <attr format="integer" name="lockview_path_color"/>
+  </declare-styleable>
+
+  <declare-styleable name="PPCellWithEditTextVerifyCode">
+    <attr name="cell_edit_text_style"/>
+    <attr name="cell_hint"/>
+    <attr name="cell_text_margin_left"/>
+    <attr name="cell_text_margin_right"/>
+    <attr format="reference" name="cell_clear_icon"/>
+    <attr format="reference" name="cell_verify_icon"/>
+    <attr format="boolean" name="cell_input_number"/>
+    <attr name="cell_padding_left"/>
+    <attr name="cell_padding_right"/>
+    <attr name="cell_password"/>
+    <attr name="cell_editable"/>
+    <attr name="cell_title_width"/>
+    <attr name="cell_title"/>
+    <attr name="cell_title_visible"/>
+    <attr name="cell_title_color"/>
+    <attr name="cell_title_size"/>
+    <attr name="cell_title_icon"/>
+    <attr name="cell_title_padding_left"/>
+    <attr format="boolean" name="cell_verify_code"/>
+  </declare-styleable>
+
+
+  <declare-styleable name="PPCellWithEditTextIcon">
+    <attr name="cell_edit_text_style"/>
+    <attr name="cell_hint"/>
+    <attr name="cell_text_margin_left"/>
+    <attr name="cell_text_margin_right"/>
+    <attr name="cell_icon"/>
+    <attr name="cell_image"/>
+    <attr name="cell_icon_size"/>
+    <attr name="cell_image_size"/>
+    <attr name="cell_padding_left"/>
+    <attr name="cell_padding_right"/>
+    <attr name="cell_password"/>
+    <attr name="cell_editable"/>
+    <attr name="cell_title_width"/>
+    <attr name="cell_title"/>
+    <attr name="cell_title_visible"/>
+    <attr name="cell_title_color"/>
+    <attr name="cell_title_size"/>
+    <attr name="cell_title_icon"/>
+    <attr name="cell_title_padding_left"/>
+  </declare-styleable>
+
+  <declare-styleable name="PPFieldCell">
+    <attr name="cell_edit_text_style"/>
+    <attr name="cell_password"/>
+    <attr name="cell_editable"/>
+    <attr name="cell_hint"/>
+    <attr name="cell_value_size"/>
+    <attr name="cell_value_color"/>
+    <attr name="cell_padding_left"/>
+    <attr name="cell_padding_right"/>
+    <attr name="cell_title_padding_left"/>
+    <attr name="cell_subtitle_padding_right"/>
+    <attr name="cell_icon_size"/>
+    <attr name="forward_visible_status"/>
+    <attr name="cell_avatar_img"/>
+    <attr name="cell_avatar_img_size"/>
+    <attr name="cell_avatar_img_rounded"/>
+    <attr name="cell_title_width"/>
+    <attr name="cell_title"/>
+    <attr name="cell_sub_title"/>
+    <attr name="cell_title_visible"/>
+    <attr name="cell_title_color"/>
+    <attr name="cell_title_size"/>
+    <attr name="cell_title_icon"/>
+    <attr format="string" name="cell_subtitle"/>
+    <attr format="color" name="cell_subtitle_color"/>
+    <attr format="integer" name="cell_accessory_icon"/>
+    <attr format="boolean" name="cell_accessory_icon_hidden"/>
+    <attr format="color" name="cell_value_hint_color"/>
+  </declare-styleable>
+
+  <declare-styleable name="PPFieldLimitedText">
+    <attr name="cell_edit_text_style"/>
+    <attr format="dimension" name="field_edit_text_height"/>
+    <attr format="integer" name="field_max_text_count"/>
+    <attr format="reference" name="field_hint"/>
+  </declare-styleable>
+
+  <!-- Rounded Image View -->
+  <declare-styleable name="RoundedImageView">
+    <attr format="dimension" name="riv_corner_radius"/>
+    <attr format="dimension" name="riv_border_width"/>
+    <attr format="color" name="riv_border_color"/>
+    <attr format="boolean" name="riv_mutate_background"/>
+    <attr format="boolean" name="riv_oval"/>
+    <attr name="android:scaleType"/>
+    <attr name="riv_tile_mode">
+      <enum name="clamp" value="0"/>
+      <enum name="repeat" value="1"/>
+      <enum name="mirror" value="2"/>
+    </attr>
+    <attr name="riv_tile_mode_x">
+      <enum name="clamp" value="0"/>
+      <enum name="repeat" value="1"/>
+      <enum name="mirror" value="2"/>
+    </attr>
+    <attr name="riv_tile_mode_y">
+      <enum name="clamp" value="0"/>
+      <enum name="repeat" value="1"/>
+      <enum name="mirror" value="2"/>
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="BannerView">
+    <attr format="string" name="bannerUrl"/>
+    <attr format="reference" name="bannerImages"/>
+  </declare-styleable>
+
+  <declare-styleable name="RippleBackground">
+    <attr format="color" name="rb_color"/>
+    <attr format="dimension" name="rb_strokeWidth"/>
+    <attr format="dimension" name="rb_radius"/>
+    <attr format="integer" name="rb_duration"/>
+    <attr format="integer" name="rb_rippleAmount"/>
+    <attr format="float" name="rb_scale"/>
+    <attr format="enum" name="rb_type">
+      <enum name="fillRipple" value="0"/>
+      <enum name="strokeRipple" value="1"/>
+    </attr>
+  </declare-styleable>
+
+  <!-- Floating Action Button -->
+  <declare-styleable name="FloatingActionButton">
+    <attr format="color" name="fab_colorPressed"/>
+    <attr format="color" name="fab_colorDisabled"/>
+    <attr format="color" name="fab_colorNormal"/>
+    <attr format="reference" name="fab_icon"/>
+    <attr format="enum" name="fab_size">
+      <enum name="normal" value="0"/>
+      <enum name="mini" value="1"/>
+    </attr>
+    <attr format="string" name="fab_title"/>
+    <attr format="boolean" name="fab_stroke_visible"/>
+  </declare-styleable>
+  <declare-styleable name="AddFloatingActionButton">
+    <attr format="color" name="fab_plusIconColor"/>
+  </declare-styleable>
+  <declare-styleable name="FloatingActionsMenu">
+    <attr format="color" name="fab_addButtonColorPressed"/>
+    <attr format="color" name="fab_addButtonColorNormal"/>
+    <attr format="enum" name="fab_addButtonSize">
+      <enum name="normal" value="0"/>
+      <enum name="mini" value="1"/>
+    </attr>
+    <attr format="color" name="fab_addButtonPlusIconColor"/>
+    <attr format="boolean" name="fab_addButtonStrokeVisible"/>
+    <attr format="reference" name="fab_labelStyle"/>
+    <attr format="enum" name="fab_labelsPosition">
+      <enum name="left" value="0"/>
+      <enum name="right" value="1"/>
+    </attr>
+    <attr format="enum" name="fab_expandDirection">
+      <enum name="up" value="0"/>
+      <enum name="down" value="1"/>
+      <enum name="left" value="2"/>
+      <enum name="right" value="3"/>
+    </attr>
+  </declare-styleable>
+
+  <!-- Pull To Refresh ListView -->
+  <declare-styleable name="PullToRefresh">
+
+    <!-- A drawable to use as the background of the Refreshable View -->
+    <attr format="reference|color" name="ptrRefreshableViewBackground"/>
+
+    <!-- A drawable to use as the background of the Header and Footer Loading Views -->
+    <attr format="reference|color" name="ptrHeaderBackground"/>
+
+    <!-- Text Color of the Header and Footer Loading Views -->
+    <attr format="reference|color" name="ptrHeaderTextColor"/>
+
+    <!-- Text Color of the Header and Footer Loading Views Sub Header -->
+    <attr format="reference|color" name="ptrHeaderSubTextColor"/>
+
+    <!-- Mode of Pull-to-Refresh that should be used -->
+    <attr name="ptrMode">
+      <flag name="disabled" value="0x0"/>
+      <flag name="pullFromStart" value="0x1"/>
+      <flag name="pullFromEnd" value="0x2"/>
+      <flag name="both" value="0x3"/>
+      <flag name="manualOnly" value="0x4"/>
+
+      <!-- These last two are depreacted -->
+      <flag name="pullDownFromTop" value="0x1"/>
+      <flag name="pullUpFromBottom" value="0x2"/>
+    </attr>
+
+    <!-- Whether the Indicator overlay(s) should be used -->
+    <attr format="reference|boolean" name="ptrShowIndicator"/>
+
+    <!-- Drawable to use as Loading Indicator. Changes both Header and Footer. -->
+    <attr format="reference" name="ptrDrawable"/>
+
+    <!-- Drawable to use as Loading Indicator in the Header View. Overrides value set in ptrDrawable. -->
+    <attr format="reference" name="ptrDrawableStart"/>
+
+    <!-- Drawable to use as Loading Indicator in the Footer View. Overrides value set in ptrDrawable. -->
+    <attr format="reference" name="ptrDrawableEnd"/>
+
+    <!-- Whether Android's built-in Over Scroll should be utilised for Pull-to-Refresh. -->
+    <attr format="reference|boolean" name="ptrOverScroll"/>
+
+    <!-- Base text color, typeface, size, and style for Header and Footer Loading Views -->
+    <attr format="reference" name="ptrHeaderTextAppearance"/>
+
+    <!-- Base text color, typeface, size, and style for Header and Footer Loading Views Sub Header -->
+    <attr format="reference" name="ptrSubHeaderTextAppearance"/>
+
+    <!-- Style of Animation should be used displayed when pulling. -->
+    <attr name="ptrAnimationStyle">
+      <flag name="rotate" value="0x0"/>
+      <flag name="flip" value="0x1"/>
+    </attr>
+
+    <!-- Whether the user can scroll while the View is Refreshing -->
+    <attr format="reference|boolean" name="ptrScrollingWhileRefreshingEnabled"/>
+
+    <!--
+      Whether PullToRefreshListView has it's extras enabled. This allows the user to be
+      able to scroll while refreshing, and behaves better. It acheives this by adding
+      Header and/or Footer Views to the ListView.
+    -->
+    <attr format="reference|boolean" name="ptrListViewExtrasEnabled"/>
+
+    <!--
+      Whether the Drawable should be continually rotated as you pull. This only
+      takes effect when using the 'Rotate' Animation Style.
+    -->
+    <attr format="reference|boolean" name="ptrRotateDrawableWhilePulling"/>
+
+    <!-- BELOW HERE ARE DEPRECEATED. DO NOT USE. -->
+    <attr format="reference|color" name="ptrAdapterViewBackground"/>
+    <attr format="reference" name="ptrDrawableTop"/>
+    <attr format="reference" name="ptrDrawableBottom"/>
+  </declare-styleable>
+
+  <declare-styleable name="stl_SmartTabLayout">
+    <attr format="boolean" name="stl_indicatorAlwaysInCenter"/>
+    <attr format="boolean" name="stl_indicatorWithoutPadding"/>
+    <attr format="boolean" name="stl_indicatorInFront"/>
+    <attr format="enum" name="stl_indicatorInterpolation">
+      <enum name="smart" value="0"/>
+      <enum name="linear" value="1"/>
+    </attr>
+    <attr format="enum" name="stl_indicatorGravity">
+      <enum name="bottom" value="0"/>
+      <enum name="top" value="1"/>
+      <enum name="center" value="2"/>
+    </attr>
+    <attr format="color" name="stl_indicatorColor"/>
+    <attr format="reference" name="stl_indicatorColors"/>
+    <attr format="dimension" name="stl_indicatorThickness"/>
+    <attr format="dimension" name="stl_indicatorWidth">
+      <enum name="auto" value="-1"/>
+    </attr>
+    <attr format="dimension" name="stl_indicatorCornerRadius"/>
+    <attr format="color" name="stl_overlineColor"/>
+    <attr format="dimension" name="stl_overlineThickness"/>
+    <attr format="color" name="stl_underlineColor"/>
+    <attr format="dimension" name="stl_underlineThickness"/>
+    <attr format="color" name="stl_dividerColor"/>
+    <attr format="reference" name="stl_dividerColors"/>
+    <attr format="dimension" name="stl_dividerThickness"/>
+    <attr format="reference" name="stl_defaultTabBackground"/>
+    <attr format="boolean" name="stl_defaultTabTextAllCaps"/>
+    <attr format="color|reference" name="stl_defaultTabTextColor"/>
+    <attr format="dimension" name="stl_defaultTabTextSize"/>
+    <attr format="dimension" name="stl_defaultTabTextHorizontalPadding"/>
+    <attr format="dimension" name="stl_defaultTabTextMinWidth"/>
+    <attr format="reference" name="stl_customTabTextLayoutId"/>
+    <attr format="reference" name="stl_customTabTextViewId"/>
+    <attr format="boolean" name="stl_distributeEvenly"/>
+    <attr format="boolean" name="stl_clickable"/>
+    <attr format="dimension" name="stl_titleOffset">
+      <enum name="auto_center" value="-1"/>
+    </attr>
+    <attr format="boolean" name="stl_drawDecorationAfterTab"/>
+  </declare-styleable>
+
+
+  <!-- AutoLayout -->
+  <declare-styleable name="AutoLayout_Layout">
+
+    <attr name="layout_auto_basewidth">
+      <flag name="width" value="1"></flag>
+      <flag name="height" value="2"></flag>
+      <flag name="textSize" value="4"></flag>
+      <flag name="padding" value="8"></flag>
+      <flag name="margin" value="16"></flag>
+      <flag name="marginLeft" value="32"></flag>
+      <flag name="marginTop" value="64"></flag>
+      <flag name="marginRight" value="128"></flag>
+      <flag name="marginBottom" value="256"></flag>
+      <flag name="paddingLeft" value="512"></flag>
+      <flag name="paddingTop" value="1024"></flag>
+      <flag name="paddingRight" value="2048"></flag>
+      <flag name="paddingBottom" value="4096"></flag>
+    </attr>
+
+    <attr name="layout_auto_baseheight">
+      <flag name="width" value="1"></flag>
+      <flag name="height" value="2"></flag>
+      <flag name="textSize" value="4"></flag>
+      <flag name="padding" value="8"></flag>
+      <flag name="margin" value="16"></flag>
+      <flag name="marginLeft" value="32"></flag>
+      <flag name="marginTop" value="64"></flag>
+      <flag name="marginRight" value="128"></flag>
+      <flag name="marginBottom" value="256"></flag>
+      <flag name="paddingLeft" value="512"></flag>
+      <flag name="paddingTop" value="1024"></flag>
+      <flag name="paddingRight" value="2048"></flag>
+      <flag name="paddingBottom" value="4096"></flag>
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="ShareItemView">
+    <attr format="string" name="wyf_share_item_title"/>
+    <attr format="integer" name="wyf_share_item_icon"/>
+  </declare-styleable>
+</resources>

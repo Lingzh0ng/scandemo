@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <TextView
+        android:id="@+id/tvTitle1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/blue1"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:text="我的账户"
+        android:textColor="@color/blue3"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <com.wearapay.scandemo.weight.CustomLabelCell
+        android:id="@+id/cellBanlace"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        app:cell_padding_right="20dp"
+        app:cell_title="账户余额"
+        app:cell_title_size="@dimen/text_size_small"
+        app:cell_value_size="@dimen/text_size_small"
+        app:forward_visible_status="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle1" />
+
+    <com.wearapay.scandemo.weight.CustomLabelCell
+        android:id="@+id/cellFeng"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        app:cell_padding_right="20dp"
+        app:cell_title="信用积分"
+        app:cell_title_size="@dimen/text_size_small"
+        app:cell_value_size="@dimen/text_size_small"
+        app:forward_visible_status="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cellBanlace" />
+
+    <Button
+        android:id="@+id/bntCharge"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="-1dp"
+        android:background="@drawable/btn_primary"
+        android:text="去充值"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/bntPwd"
+        app:layout_constraintTop_toBottomOf="@+id/cellFeng" />
+
+    <Button
+        android:id="@+id/bntPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginRight="91dp"
+        android:layout_marginTop="-1dp"
+        android:background="@drawable/btn_primary"
+        android:text="修改密码"
+        android:textColor="@color/white"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cellFeng" />
+
+    <Button
+        android:id="@+id/btnInfo"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_primary"
+        android:text="使用设备的历史详情"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bntPwd"
+        tools:layout_editor_absoluteY="170dp" />
+
+    <TextView
+        android:id="@+id/tvTitle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/blue1"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:text="我的设备"
+        android:textColor="@color/blue3"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInfo"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <com.wearapay.scandemo.weight.CustomLabelCell
+        android:id="@+id/cellDeviceNo"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        app:cell_padding_right="20dp"
+        app:cell_title="设备编号"
+        app:cell_title_size="@dimen/text_size_small"
+        app:cell_value_size="@dimen/text_size_small"
+        app:forward_visible_status="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle2" />
+
+    <Button
+        android:id="@+id/btnDeviceManage"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/btn_primary"
+        android:text="设备管理"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cellDeviceNo"
+        tools:layout_editor_absoluteY="170dp" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_primary"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDeviceManage"
+        tools:layout_editor_absoluteY="170dp" />
+
+
+</android.support.constraint.ConstraintLayout>

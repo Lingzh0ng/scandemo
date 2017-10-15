@@ -12,7 +12,7 @@ import com.wearapay.scandemo.base.BaseActivity;
 import com.wearapay.scandemo.utils.ActivityUtils;
 import javax.inject.Inject;
 
-import static net.ezbim.scan.simple.SimpleScanActivity.SIMPLE_SCAN_RESULT;
+//import static net.ezbim.scan.simple.SimpleScanActivity.SIMPLE_SCAN_RESULT;
 
 public class MainActivity extends BaseActivity {
 
@@ -42,7 +42,9 @@ public class MainActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putInt(AppConstant.STATUS_COLOR, R.color.test_color);
         bundle.putString("title", "test");
-        ActivityUtils.startFragment(MainActivity.this, AppConstant.FragmentType.Test, bundle);
+        ActivityUtils.startFragment(MainActivity.this, AppConstant.FragmentType.Login, bundle);
+
+        finish();
       }
     });
   }
@@ -54,9 +56,9 @@ public class MainActivity extends BaseActivity {
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (data != null) {
-      String stringExtra = data.getStringExtra(SIMPLE_SCAN_RESULT);
-      Toast.makeText(this, "QR1111119988:" + stringExtra, Toast.LENGTH_SHORT).show();
-      tv.setText(stringExtra);
+//      String stringExtra = data.getStringExtra(SIMPLE_SCAN_RESULT);
+//      Toast.makeText(this, "QR1111119988:" + stringExtra, Toast.LENGTH_SHORT).show();
+//      tv.setText(stringExtra);
     }
   }
 }
