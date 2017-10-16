@@ -42,17 +42,17 @@ dependencies {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
   //  compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportVersion
-//  compile 'com.android.support:support-annotations:' + rootProject.ext.supportVersion
-  compile 'com.android.support.constraint:constraint-layout:1.0.2'
-  testCompile 'junit:junit:4.12'
+  //  compile 'com.android.support:support-annotations:' + rootProject.ext.supportVersion
   compile project(':scan')
   compile project(':domain')
-  compile 'com.google.dagger:dagger:2.12'
-  annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
-  annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
-  compile 'com.jakewharton:butterknife:8.7.0'
   compile 'com.android.support:design:' + rootProject.ext.supportVersion
   compile 'com.android.support:recyclerview-v7:' + supportVersion
+  compile 'com.android.support.constraint:constraint-layout:1.0.2'
+  compile 'com.google.dagger:dagger:2.12'
+  compile 'com.jakewharton:butterknife:8.7.0'
   compile 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
   compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+  testCompile 'junit:junit:4.12'
+  annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
+  annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
 }

@@ -15,6 +15,27 @@ import com.wearapay.scandemo.base.BaseFragment;
 
 public class ActivityUtils {
 
+  public static Bundle getBundle(String title){
+    return getBundle( R.color.test_color, title, true, false);
+  }
+
+  public static Bundle getBundle(int color,String title){
+    return getBundle( color, title, true, false);
+  }
+
+  public static Bundle getBundle(int color,String title,boolean canBack){
+    return getBundle( color, title, canBack, false);
+  }
+
+  public static Bundle getBundle(int color,String title,boolean canBack,boolean showMenu){
+    Bundle bundle = new Bundle();
+    bundle.putInt(AppConstant.STATUS_COLOR, R.color.test_color);
+    bundle.putString(AppConstant.TITLE, title);
+    bundle.putBoolean(AppConstant.CAN_BACK, canBack);
+    bundle.putBoolean(AppConstant.SHOW_MENU, showMenu);
+    return bundle;
+  }
+
   public static void addFragment(@NonNull FragmentManager fragmentManager,
       @NonNull Fragment sourceFragment, @NonNull Fragment destFragment, int frameId) {
     checkNotNull(fragmentManager);
