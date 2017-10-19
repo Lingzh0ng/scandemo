@@ -21,7 +21,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -62,8 +62,8 @@ public class SimpleScanActivity extends AppCompatActivity
   private MediaPlayer mediaPlayer;
   private CapturedDecoderHandler handler;
   private ArrayList<String> scanList;
-  private Button bntBack;
-  private Button bntLight;
+  private ImageView bntBack;
+  private ImageButton bntLight;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -75,8 +75,8 @@ public class SimpleScanActivity extends AppCompatActivity
     //getSupportActionBar().setTitle("扫一扫");
     //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     //getSupportActionBar().setDisplayUseLogoEnabled(false);
-    bntBack = (Button) findViewById(R.id.bntBack);
-    bntLight = (Button) findViewById(R.id.bntLight);
+    bntBack = (ImageView) findViewById(R.id.bntBack);
+    bntLight = (ImageButton) findViewById(R.id.bntLight);
     capturePreview = (SurfaceView) findViewById(R.id.capture_preview);
     captureScanLine = (ImageView) findViewById(R.id.capture_scan_line);
     captureCropLayout = (RelativeLayout) findViewById(R.id.capture_crop_layout);
@@ -230,13 +230,13 @@ public class SimpleScanActivity extends AppCompatActivity
   private void openLight() {
     CameraManager.get().openLight();
     lightFlag = true;
-    bntLight.setText("close");
+    bntLight.setBackgroundResource(R.drawable.menu_off_light);
   }
 
   private void closeLight() {
     CameraManager.get().offLight();
     lightFlag = false;
-    bntLight.setText("open");
+    bntLight.setBackgroundResource(R.drawable.menu_on_light);
   }
 
   private void recoverLight() {

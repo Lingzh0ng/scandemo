@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 /**
  * Created by lyz54 on 2017/6/27.
@@ -32,6 +33,7 @@ public class StatusBarCompat {
             if (statusColor != INVALID_VAL) {
                 color = statusColor;
             }
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             View statusBarView = new View(activity);
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     getStatusHeight(activity));

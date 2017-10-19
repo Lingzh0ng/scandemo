@@ -113,36 +113,38 @@
       android:textSize="15sp"
       />
 
-  <LinearLayout
+  <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="60dp"
       android:gravity="center_vertical"
-      android:orientation="horizontal"
       >
 
-    <Button
+    <ImageView
         android:id="@+id/bntBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="center"
+        android:src="@drawable/icon_back_scan"
         />
 
     <TextView
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_gravity="center"
         android:gravity="center"
         android:text="扫一扫"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         />
-    <Button
+    <ImageButton
         android:id="@+id/bntLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="open"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/menu_on_light"
         />
 
-  </LinearLayout>
+  </FrameLayout>
 
 </RelativeLayout>

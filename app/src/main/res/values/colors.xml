@@ -15,6 +15,7 @@
 
   <color name="rippelColor">#0099CC</color>
   <color name="cell_bg_color">@color/white</color>
+  <color name="cell_bg_color_second">@color/text_color_secondary</color>
 
   <color name="light_gray">#D2D2D2</color>
   <color name="median_gray">#CCCCCC</color>
@@ -23,10 +24,15 @@
   <color name="light_blue">#007AFF</color>
   <color name="pattern_path_red">#f1275a</color>
 
-  <color name="primary">#EC7421</color>
-  <color name="secondary">#EC7421</color>
-  <color name="light">#F09858</color>
-  <color name="highlight">#ED6A10</color>
+  <color name="primary1">#EC7421</color>
+  <color name="secondary1">#EC7421</color>
+  <color name="light1">#F09858</color>
+  <color name="highlight1">#ED6A10</color>
+
+  <color name="primary">#723456</color>
+  <color name="secondary">#8C3456</color>
+  <color name="light">#903456</color>
+  <color name="highlight">#993F5F</color>
   <color name="primary_bg">#EAEAEA</color>
   <color name="text_color_primary">#FF4c4c4c</color>
   <color name="text_color_secondary">#FF808080</color>
@@ -34,7 +40,8 @@
 
   <color name="action_bar">@color/white</color>
   <color name="action_bar_2">#CCFFFFFF</color>
-  <color name="status_bar_bg">#30000000</color>
+  <color name="status_bar_bg">#00000000</color>
   <color name="shade_text_bg">#4D000000</color>
   <color name="shade_cover_window">#80000000</color>
+  <color name="def_status_color">#20000000</color>
 </resources>

@@ -9,16 +9,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-
+import butterknife.ButterKnife;
 import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
 import com.wearapay.scandemo.R;
 import com.wearapay.scandemo.utils.AppUtils;
-import com.wearapay.scandemo.utils.StatusBarCompat;
-
+import com.wearapay.scandemo.utils.SystemBarTintManager;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import butterknife.ButterKnife;
 
 /**
  * Created by lyz on 2017/6/27.
@@ -26,7 +23,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends RxFragmentActivity {
 
   public int getStatusColor() {
-    return getResources().getColor(color);
+    return color;
   }
 
   protected int color = R.color.status_bar_bg;
@@ -49,16 +46,16 @@ public abstract class BaseActivity extends RxFragmentActivity {
     //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     setContentView(getLayoutId());
     ButterKnife.bind(this);
-    StatusBarCompat.compat(this, getStatusColor());
-    //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-    //  setTranslucentStatus(true);
-    //  SystemBarTintManager tintManager = new SystemBarTintManager(this);
-    //  tintManager.setStatusBarTintEnabled(true);
-    //
-    //  //通知栏所需颜色
-    //  tintManager.setStatusBarTintResource(R.color.transparent);
-    //  //tintManager.setStatusBarTintResource(R.color.action_bar);
-    //}
+    //StatusBarCompat.compat(this, getStatusColor());
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      setTranslucentStatus(true);
+      SystemBarTintManager tintManager = new SystemBarTintManager(this);
+      tintManager.setStatusBarTintEnabled(true);
+
+      //通知栏所需颜色
+      tintManager.setStatusBarTintResource(getStatusColor());
+      //tintManager.setStatusBarTintResource(R.color.status_bar_bg);
+    }
     isActive = new AtomicBoolean(true);
   }
 
