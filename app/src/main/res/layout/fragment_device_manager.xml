@@ -3,74 +3,90 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    >
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+  <android.support.design.widget.AppBarLayout
+      android:id="@+id/appbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:fitsSystemWindows="true"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      >
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:orientation="vertical"
+        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:orientation="vertical">
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="44dp"
+          android:fitsSystemWindows="true"
+          >
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:fitsSystemWindows="true">
+        <include layout="@layout/title_view"/>
+      </FrameLayout>
+    </LinearLayout>
 
-                <include layout="@layout/title_view" />
-            </FrameLayout>
-        </LinearLayout>
+  </android.support.design.widget.AppBarLayout>
 
-    </android.support.design.widget.AppBarLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      >
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue1"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:text="已有设备列表"
+        android:textColor="@color/blue3"
+        />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
-        <LinearLayout
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/blue1"
-                android:padding="5dp"
-                android:paddingStart="20dp"
-                android:text="已有设备列表"
-                android:textColor="@color/blue3" />
+        <Button
+            android:id="@+id/btnLoss"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_primary"
+            android:text="添加设备"
+            android:textColor="@color/white"
+            />
 
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycleView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never" />
-
-            <Button
-                android:id="@+id/btnLoss"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_margin="20dp"
-                android:background="@drawable/btn_primary"
-                android:text="添加设备"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
+      </LinearLayout>
 
 
     </android.support.v4.widget.NestedScrollView>
+
+  </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -7,12 +7,10 @@ import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.wearapay.scandemo.base.BaseActivity;
+import com.wearapay.scandemo.module.home.HomeActivity;
 import com.wearapay.scandemo.utils.ActivityUtils;
 import javax.inject.Inject;
-
-//import static net.ezbim.scan.simple.SimpleScanActivity.SIMPLE_SCAN_RESULT;
 
 public class MainActivity extends BaseActivity {
 
@@ -33,16 +31,23 @@ public class MainActivity extends BaseActivity {
     open.setOnClickListener(new View.OnClickListener() {
       @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP) @Override public void onClick(View v) {
         //                startActivityForResult(new Intent(MainActivity.this, SimpleScanActivity.class), 1);
-        String test = dest1.show("lyz", "540101");
-
-        Toast.makeText(MainActivity.this, "1:" + test, Toast.LENGTH_SHORT).show();
-        //        System.out.println(test);
-        //                System.out.println(((UserNetRepositoryImpl) userRepository).getServiceType());
+        //String test = dest1.show("lyz", "540101");
         //
+        //Toast.makeText(MainActivity.this, "1:" + test, Toast.LENGTH_SHORT).show();
+      if (!dest1.getLoginStatus()) {
         Bundle bundle = new Bundle();
         bundle.putInt(AppConstant.STATUS_COLOR, R.color.test_color);
         bundle.putString("title", "test");
+        bundle.putBoolean(AppConstant.CAN_BACK, false);
         ActivityUtils.startFragment(MainActivity.this, AppConstant.FragmentType.Login, bundle);
+      }else {
+        Bundle bundle = ActivityUtils.getBundle(R.color.test_color, "扫码开锁", false, true);
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        intent.putExtras(bundle);
+        intent.setFlags(
+            Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+      }
 
         finish();
       }

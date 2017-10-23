@@ -74,7 +74,7 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseRxVie
         @Override
         public void onClick(View view) {
             if (view == ivBack) {
-                if (canBack) onBackPressed(true);
+                if (canBack) {onBackPressed(true);}
             } else if (view == ivMenu) {
                 OnClickMenu();
             }

@@ -22,14 +22,14 @@ public abstract class BaseRxPresenter<T> extends BasePresenter<T> {
 
   public abstract <T> LifecycleTransformer<T> bindUntilLifecycle(FragmentEvent event);
 
-  protected Observable<Object> wrap(Observable<Object> origin) {
-    return origin.compose(bindToLifecycle())
+  protected <T> Observable<T> wrap(Observable<T> origin) {
+    return (Observable<T>) origin.compose(bindToLifecycle())
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  protected Observable<Object> wrapBindUntil(Observable<Object> origin, FragmentEvent event) {
-    return origin.compose(bindUntilLifecycle(event))
+  protected <T> Observable<T> wrapBindUntil(Observable<T> origin, FragmentEvent event) {
+    return (Observable<T>) origin.compose(bindUntilLifecycle(event))
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
