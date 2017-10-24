@@ -13,9 +13,9 @@
         android:id="@+id/btnCharge"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/white"
+        android:textColor="@color/blue1"
         android:layout_margin="5dp"
-        android:background="@drawable/btn_primary"
-        android:text="挂失" />
+        android:background="@drawable/btn_charge"
+        />
 
 </LinearLayout>

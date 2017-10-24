@@ -7,12 +7,14 @@ package com.wearapay.scandemo.bean;
 public enum  ChargeType {
 
   CHARGE_10("充值10元",10),
-  CHARGE_50("充值50元",50),
-  CHARGE_100("充值100元",100),
-  CHARGE_200("充值200元",200),
-  CHARGE_500("充值500元",500),
-  CHARGE_1000("充值1000元",1000),
-  CHARGE_10000("充值10000元",10000);
+  CHARGE_50("充值50元(送5元)",50),
+  CHARGE_100("充值100元(送13元)",100),
+  CHARGE_150("充值100元(送20元)",100),
+  CHARGE_200("充值200元(送28元)",200),
+  CHARGE_300("充值200元(送45元)",200),
+  CHARGE_500("充值500元(送85元)",500),
+  CHARGE_1000("充值1000元(送200元)",1000),
+  CHARGE_10000("充值10000元(送5元)",10000);
 
   public String getShowMsg() {
     return showMsg;

@@ -36,7 +36,7 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseRxVie
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        color = getIntent().getIntExtra(AppConstant.STATUS_COLOR, color);
+//        color = getIntent().getIntExtra(AppConstant.STATUS_COLOR, color);
 //    color = getResources().getColor(colorId);
         canBack = getIntent().getBooleanExtra(AppConstant.CAN_BACK, true);
         String title = getIntent().getStringExtra(AppConstant.TITLE);

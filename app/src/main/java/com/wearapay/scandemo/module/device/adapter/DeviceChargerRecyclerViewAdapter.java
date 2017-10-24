@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.wearapay.scandemo.R;
 import com.wearapay.scandemo.bean.ChargeType;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DeviceChargerRecyclerViewAdapter
     extends RecyclerView.Adapter<DeviceChargerRecyclerViewAdapter.ViewHolder> {
@@ -19,13 +22,15 @@ public class DeviceChargerRecyclerViewAdapter
   private final OnListFragmentInteractionListener mListener;
 
   static {
-    mValues.add(ChargeType.CHARGE_10);
+//    mValues.add(ChargeType.CHARGE_10);
     mValues.add(ChargeType.CHARGE_50);
     mValues.add(ChargeType.CHARGE_100);
+    mValues.add(ChargeType.CHARGE_150);
     mValues.add(ChargeType.CHARGE_200);
+    mValues.add(ChargeType.CHARGE_300);
     mValues.add(ChargeType.CHARGE_500);
     mValues.add(ChargeType.CHARGE_1000);
-    mValues.add(ChargeType.CHARGE_10000);
+//    mValues.add(ChargeType.CHARGE_10000);
   }
 
   public DeviceChargerRecyclerViewAdapter(OnListFragmentInteractionListener listener) {
