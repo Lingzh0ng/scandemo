@@ -1,6 +1,7 @@
 package net.ezbim.scan.simple;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Point;
 import android.media.AudioManager;
@@ -164,6 +165,10 @@ public class SimpleScanActivity extends AppCompatActivity
     try {
       CameraManager.get().openDriver(surfaceHolder);
 
+      if (CameraManager.get().getFlashMode()) {
+        CameraManager.get().offLight();
+      }
+
       Point point = CameraManager.get().getCameraResolution();
       int width = point.y;
       int height = point.x;
@@ -323,6 +328,11 @@ public class SimpleScanActivity extends AppCompatActivity
     if (v == bntBack) {
       finish();
     } else if (v == bntLight) {
+      if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+        Toast.makeText(this, "你的手机没有闪光灯!", Toast.LENGTH_LONG).show();
+        return;
+      }
+
       if (lightFlag) {
         closeLight();
       } else {

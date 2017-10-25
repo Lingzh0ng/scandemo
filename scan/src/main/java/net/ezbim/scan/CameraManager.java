@@ -1,143 +1,155 @@
 package net.ezbim.scan;
 
-
 import android.content.Context;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Handler;
 import android.view.SurfaceHolder;
-
 import java.io.IOException;
 
 /**
  * 描述: 相机管理
  */
 public final class CameraManager {
-	private static CameraManager cameraManager;
+  private static CameraManager cameraManager;
 
-	static final int SDK_INT;
-	static {
-		int sdkInt;
-		try {
-			sdkInt = android.os.Build.VERSION.SDK_INT;
-		} catch (NumberFormatException nfe) {
-			sdkInt = 10000;
-		}
-		SDK_INT = sdkInt;
-	}
+  static final int SDK_INT;
 
-	private final CameraConfigurationManager configManager;
+  static {
+    int sdkInt;
+    try {
+      sdkInt = android.os.Build.VERSION.SDK_INT;
+    } catch (NumberFormatException nfe) {
+      sdkInt = 10000;
+    }
+    SDK_INT = sdkInt;
+  }
 
-	public Camera getCamera() {
-		return camera;
-	}
+  private final CameraConfigurationManager configManager;
 
-	private Camera camera;
-	private boolean initialized;
-	private boolean previewing;
-	private final boolean useOneShotPreviewCallback;
-	private final PreviewCallback previewCallback;
-	private final AutoFocusCallback autoFocusCallback;
-	private Parameters parameter;
+  public Camera getCamera() {
+    return camera;
+  }
 
-	public static void init(Context context) {
-		if (cameraManager == null) {
-			cameraManager = new CameraManager(context);
-		}
-	}
+  private Camera camera;
+  private boolean initialized;
+  private boolean previewing;
+  private final boolean useOneShotPreviewCallback;
+  private final PreviewCallback previewCallback;
+  private final AutoFocusCallback autoFocusCallback;
+  private Parameters parameter;
 
-	public static CameraManager get() {
-		return cameraManager;
-	}
+  public static void init(Context context) {
+    if (cameraManager == null) {
+      cameraManager = new CameraManager(context);
+    }
+  }
 
-	private CameraManager(Context context) {
-		this.configManager = new CameraConfigurationManager(context);
+  public static CameraManager get() {
+    return cameraManager;
+  }
 
-		useOneShotPreviewCallback = SDK_INT > 3;
-		previewCallback = new PreviewCallback(configManager, useOneShotPreviewCallback);
-		autoFocusCallback = new AutoFocusCallback();
-	}
+  private CameraManager(Context context) {
+    this.configManager = new CameraConfigurationManager(context);
 
-	public void openDriver(SurfaceHolder holder) throws IOException {
-		if (camera == null) {
-			camera = Camera.open();
-			if (camera == null) {
-				throw new IOException();
-			}
-			camera.setPreviewDisplay(holder);
+    useOneShotPreviewCallback = SDK_INT > 3;
+    previewCallback = new PreviewCallback(configManager, useOneShotPreviewCallback);
+    autoFocusCallback = new AutoFocusCallback();
+  }
 
-			if (!initialized) {
-				initialized = true;
-				configManager.initFromCameraParameters(camera);
-			}
-			configManager.setDesiredCameraParameters(camera);
-			FlashlightManager.enableFlashlight();
-		}
-	}
+  public void openDriver(SurfaceHolder holder) throws IOException {
+    if (camera == null) {
+      camera = Camera.open();
+      if (camera == null) {
+        throw new IOException();
+      }
+      camera.setPreviewDisplay(holder);
 
-	public Point getCameraResolution() {
-		return configManager.getCameraResolution();
-	}
+      if (!initialized) {
+        initialized = true;
+        configManager.initFromCameraParameters(camera);
+      }
+      configManager.setDesiredCameraParameters(camera);
+      FlashlightManager.enableFlashlight();
+    }
+  }
 
-	public void closeDriver() {
-		if (camera != null) {
-			FlashlightManager.disableFlashlight();
-			camera.release();
-			camera = null;
-		}
-	}
+  public Point getCameraResolution() {
+    return configManager.getCameraResolution();
+  }
 
-	public void startPreview() {
-		if (camera != null && !previewing) {
-			camera.startPreview();
-			previewing = true;
-		}
-	}
+  public void closeDriver() {
+    if (camera != null) {
+      FlashlightManager.disableFlashlight();
+      camera.release();
+      camera = null;
+    }
+  }
 
-	public void stopPreview() {
-		if (camera != null && previewing) {
-			if (!useOneShotPreviewCallback) {
-				camera.setPreviewCallback(null);
-			}
-			camera.stopPreview();
-			previewCallback.setHandler(null, 0);
-			autoFocusCallback.setHandler(null, 0);
-			previewing = false;
-		}
-	}
+  public void startPreview() {
+    if (camera != null && !previewing) {
+      camera.startPreview();
+      previewing = true;
+    }
+  }
 
-	public void requestPreviewFrame(Handler handler, int message) {
-		if (camera != null && previewing) {
-			previewCallback.setHandler(handler, message);
-			if (useOneShotPreviewCallback) {
-				camera.setOneShotPreviewCallback(previewCallback);
-			} else {
-				camera.setPreviewCallback(previewCallback);
-			}
-		}
-	}
+  public void stopPreview() {
+    if (camera != null && previewing) {
+      if (!useOneShotPreviewCallback) {
+        camera.setPreviewCallback(null);
+      }
+      camera.stopPreview();
+      previewCallback.setHandler(null, 0);
+      autoFocusCallback.setHandler(null, 0);
+      previewing = false;
+    }
+  }
 
-	public void requestAutoFocus(Handler handler, int message) {
-		if (camera != null && previewing) {
-			autoFocusCallback.setHandler(handler, message);
-			camera.autoFocus(autoFocusCallback);
-		}
-	}
+  public void requestPreviewFrame(Handler handler, int message) {
+    if (camera != null && previewing) {
+      previewCallback.setHandler(handler, message);
+      if (useOneShotPreviewCallback) {
+        camera.setOneShotPreviewCallback(previewCallback);
+      } else {
+        camera.setPreviewCallback(previewCallback);
+      }
+    }
+  }
 
-	public void openLight() {
-		if (camera != null) {
-			parameter = camera.getParameters();
-			parameter.setFlashMode(Parameters.FLASH_MODE_TORCH);
-			camera.setParameters(parameter);
-		}
-	}
+  public void requestAutoFocus(Handler handler, int message) {
+    if (camera != null && previewing) {
+      autoFocusCallback.setHandler(handler, message);
+      camera.autoFocus(autoFocusCallback);
+    }
+  }
 
-	public void offLight() {
-		if (camera != null) {
-			parameter = camera.getParameters();
-			parameter.setFlashMode(Parameters.FLASH_MODE_OFF);
-			camera.setParameters(parameter);
-		}
-	}
+  public void openLight() {
+    if (camera != null) {
+      parameter = camera.getParameters();
+      parameter.setFlashMode(Parameters.FLASH_MODE_TORCH);
+      camera.setParameters(parameter);
+    }
+  }
+
+  public void offLight() {
+    if (camera != null) {
+      parameter = camera.getParameters();
+      parameter.setFlashMode(Parameters.FLASH_MODE_OFF);
+      camera.setParameters(parameter);
+    }
+  }
+
+  public boolean getFlashMode() {
+    if (camera != null) {
+      parameter = camera.getParameters();
+      String flashMode = parameter.getFlashMode();
+      if (Parameters.FLASH_MODE_OFF.equals(flashMode)) {
+        return false;
+      } else if (Parameters.FLASH_MODE_TORCH.equals(flashMode)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
