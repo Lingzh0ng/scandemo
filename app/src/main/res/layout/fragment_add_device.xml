@@ -93,10 +93,11 @@
             <Button
                 android:id="@+id/btnAdd"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/btn_primary"
                 android:text="确定添加"
+                android:textSize="@dimen/text_size_large"
                 android:textColor="@color/white" />
 
         </LinearLayout>

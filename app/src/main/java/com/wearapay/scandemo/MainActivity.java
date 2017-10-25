@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.wearapay.scandemo.base.BaseActivity;
 import com.wearapay.scandemo.module.home.HomeActivity;
@@ -21,13 +22,14 @@ public class MainActivity extends BaseActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
 
     App.app.getComponent().inject(this);
 
     // Example of a call to a native method
     tv = (TextView) findViewById(R.id.sample_text);
     open = (Button) findViewById(R.id.open);
+    LinearLayout my_action_bar = (LinearLayout) findViewById(R.id.my_action_bar);
+    my_action_bar.setBackgroundColor(getResources().getColor(R.color.test_color));
     open.setOnClickListener(new View.OnClickListener() {
       @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP) @Override public void onClick(View v) {
         //                startActivityForResult(new Intent(MainActivity.this, SimpleScanActivity.class), 1);
