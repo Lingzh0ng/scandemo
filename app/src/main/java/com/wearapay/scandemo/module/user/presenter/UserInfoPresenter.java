@@ -16,32 +16,14 @@ public class UserInfoPresenter extends BaseFragmentPresenter<IUserInfoView> {
   private final ILocalRepository localRepository;
   private final IUserRepository userRepository;
 
-  @Inject
-  public UserInfoPresenter(Context mContext, IUserRepository userRepository, ILocalRepository localRepository) {
+  @Inject public UserInfoPresenter(Context mContext, IUserRepository userRepository,
+      ILocalRepository localRepository) {
     super(mContext);
     this.userRepository = userRepository;
     this.localRepository = localRepository;
   }
 
-  public void reg(String username,String password){
-    //wrap(userRepository.login(username,password)).subscribe(new Observer<String>() {
-    //  @Override public void onSubscribe(@NonNull Disposable d) {
-    //
-    //  }
-    //
-    //  @Override public void onNext(@NonNull String s) {
-    //
-    //  }
-    //
-    //  @Override public void onError(@NonNull Throwable e) {
-    //
-    //  }
-    //
-    //  @Override public void onComplete() {
-    //
-    //  }
-    //});
-
-
+  public void logout() {
+    localRepository.logout();
   }
 }

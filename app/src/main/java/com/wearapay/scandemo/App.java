@@ -18,6 +18,12 @@ public class App extends Application {
 
   public static App app;
 
+  public boolean isExit() {
+    return isExit;
+  }
+
+  private boolean isExit = false;
+
   private List<Activity> activityList = new ArrayList<>();
   private int activityStatus = 0;
 
@@ -30,10 +36,12 @@ public class App extends Application {
     registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
       @Override public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         activityList.add(activity);
+        //System.out.println("onActivityCreated:" + activity.getClass().getSimpleName());
       }
 
       @Override public void onActivityStarted(Activity activity) {
         activityStatus++;
+        //System.out.println("onActivityStarted:" + activity.getClass().getSimpleName());
       }
 
       @Override public void onActivityResumed(Activity activity) {
@@ -46,14 +54,16 @@ public class App extends Application {
 
       @Override public void onActivityStopped(Activity activity) {
         activityStatus--;
+        //System.out.println("onActivityStopped:" + activity.getClass().getSimpleName());
       }
 
       @Override public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
+        //System.out.println("onActivitySaveInstanceState:" + activity.getClass().getSimpleName());
       }
 
       @Override public void onActivityDestroyed(Activity activity) {
         activityList.remove(activity);
+        //System.out.println("onActivityDestroyed:" + activity.getClass().getSimpleName());
       }
     });
 
@@ -76,6 +86,7 @@ public class App extends Application {
   }
 
   public void exitApp() {
+    isExit = true;
     for (int i = 0; i < activityList.size(); i++) {
       activityList.get(i).finish();
     }

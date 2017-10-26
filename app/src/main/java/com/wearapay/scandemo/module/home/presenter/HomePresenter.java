@@ -23,4 +23,7 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
     this.localRepository = localRepository;
   }
 
+  public boolean getLoginStatus(){
+    return localRepository.getLoginStatus();
+  }
 }

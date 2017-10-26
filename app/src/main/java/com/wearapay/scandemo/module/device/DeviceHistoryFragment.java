@@ -42,7 +42,7 @@ public class DeviceHistoryFragment extends BaseMvpFragment {
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     ArrayList<DeviceHistory> devices = new ArrayList<>();
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 4; i++) {
       Device device = new Device();
       device.setDeviceNo("1234566" + i);
       device.setName("zhansan");

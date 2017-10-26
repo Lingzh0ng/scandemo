@@ -15,7 +15,6 @@ import com.wearapay.scandemo.R;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.bean.ChargeType;
 import com.wearapay.scandemo.module.device.adapter.DeviceChargerRecyclerViewAdapter;
-import com.wearapay.scandemo.utils.ToastUtils;
 
 /**
  * Created by lyz on 2017/10/13.
@@ -56,7 +55,7 @@ public class ChargeFragment extends BaseMvpFragment {
     adapter = new DeviceChargerRecyclerViewAdapter(
         new DeviceChargerRecyclerViewAdapter.OnListFragmentInteractionListener() {
           @Override public void onListFragmentInteraction(ChargeType item) {
-            ToastUtils.showShort("充值:" + item.getAccoumt());
+            //ToastUtils.showShort("充值:" + item.getAccoumt());
           }
         });
     recycleView.setAdapter(adapter);

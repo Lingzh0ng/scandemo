@@ -107,6 +107,11 @@ public abstract class BaseMvpFragment extends BaseFragment implements IBaseRxVie
     getActivity().startActivity(intent);
   }
 
+  @Override public void navToLoginPage() {
+    Bundle bundle = ActivityUtils.getBundle(R.color.test_color, "登录", false, true);
+    ActivityUtils.startFragment(getActivity(), AppConstant.FragmentType.Login, bundle);
+  }
+
   @Override public BaseFragment getUseFragment() {
     return this;
   }

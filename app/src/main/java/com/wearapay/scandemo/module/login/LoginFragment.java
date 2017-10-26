@@ -20,6 +20,7 @@ import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.module.login.presenter.LoginPresenter;
 import com.wearapay.scandemo.module.login.view.ILoginView;
 import com.wearapay.scandemo.utils.ActivityUtils;
+import com.wearapay.scandemo.utils.UIUtil;
 import com.wearapay.scandemo.weight.CustomEditCell;
 import javax.inject.Inject;
 
@@ -64,6 +65,7 @@ public class LoginFragment extends BaseMvpFragment implements ILoginView {
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    ivBack.setVisibility(View.INVISIBLE);
     cellPassword.setTextWatcher(watcher);
     cellUserName.setTextWatcher(watcher);
     updateButtonStatus();
@@ -114,5 +116,18 @@ public class LoginFragment extends BaseMvpFragment implements ILoginView {
 
   @Override public void LoginFailure() {
 
+  }
+
+  long touchTime = 0;
+
+  @Override protected boolean onBackPressed(boolean isFromKey) {
+    long currentTime = System.currentTimeMillis();
+    if ((currentTime - touchTime) >= AppConstant.EXIT_BACK_PRESSED_INTERVAL) {
+      UIUtil.showToast(getActivity(), R.string.message_double_confirm_logout);
+      touchTime = currentTime;
+    } else {
+      App.app.exitApp();
+    }
+    return true;
   }
 }

@@ -20,4 +20,6 @@ public interface IBaseView {
   void processFail(Throwable t, String errorMessage);
 
   void navToHomePage();
+
+  void navToLoginPage();
 }

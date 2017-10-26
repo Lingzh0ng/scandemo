@@ -65,7 +65,7 @@ public class CommonActivity extends BaseMvpActivity {
 
     @Override
     public void finish() {
-        if (isTaskRoot()) {
+        if (isTaskRoot() && !App.app.isExit()) {
            navToHomePage();
             Log.e("CommonActivity", "start HomeActivity");
         }

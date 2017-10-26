@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.wearapay.scandemo.AppConstant;
 import com.wearapay.scandemo.BaseMvpFragment;
 import com.wearapay.scandemo.R;
@@ -17,14 +20,7 @@ import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.bean.Device;
 import com.wearapay.scandemo.module.device.adapter.DeviceManangerRecyclerViewAdapter;
 import com.wearapay.scandemo.utils.ActivityUtils;
-import com.wearapay.scandemo.utils.ToastUtils;
-
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by lyz on 2017/10/13.
@@ -66,7 +62,7 @@ public class DeviceManagerFragment extends BaseMvpFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         devices = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 4; i++) {
             Device device = new Device();
             device.setDeviceNo("1234566" + i);
             devices.add(device);
@@ -82,8 +78,8 @@ public class DeviceManagerFragment extends BaseMvpFragment {
                 new DeviceManangerRecyclerViewAdapter.OnListFragmentInteractionListener() {
                     @Override
                     public void onListFragmentInteraction(Device item) {
-
-                        ToastUtils.showShort("删除:" + item.getDeviceNo());
+                        devices.remove(item);
+                        adapter.notifyDataSetChanged();
 
                     }
                 });

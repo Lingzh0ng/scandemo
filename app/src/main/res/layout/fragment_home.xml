@@ -39,10 +39,11 @@
     <include layout="@layout/field_separator" />
 
   <ImageView
+      android:layout_marginTop="100dp"
       android:layout_width="200dp"
       android:layout_height="200dp"
       android:layout_gravity="center"
-      android:src="@mipmap/ic_launcher"
+      android:src="@drawable/ic_logo"
       />
 
     <TextView
@@ -50,16 +51,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="data"/>
+        android:layout_marginTop="30dp"
+        />
 
-    <Button
+    <ImageView
         android:id="@+id/btnScan"
+        android:layout_gravity="center"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:scaleType="fitCenter"
+        android:textColor="@color/white"
+        android:src="@drawable/ic_scan_logo" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="scan"
-        android:textColor="@color/white"
-        android:background="@drawable/btn_primary" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="扫一扫"/>
 
   </LinearLayout>
 
