@@ -1,8 +1,8 @@
-package com.wearapay.domain.dagger;
+package com.wearapay.data.dagger;
 
 import android.content.Context;
 
-import com.wearapay.domain.DConstant;
+import com.wearapay.data.DConstant;
 import com.wearapay.net.RetrofitManager;
 import com.wearapay.net.handler.DefaultHandle;
 
@@ -14,8 +14,8 @@ import javax.inject.Singleton;
 
 import retrofit2.Retrofit;
 
-import static com.wearapay.domain.DConstant.BASE_URL;
-import static com.wearapay.domain.DConstant.BASE_URL_1;
+import static com.wearapay.data.DConstant.BASE_URL;
+import static com.wearapay.data.DConstant.BASE_URL_1;
 
 /**
  * Created by lyz on 2017/10/12.

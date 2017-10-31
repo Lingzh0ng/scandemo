@@ -1,8 +1,7 @@
 package com.wearapay.scandemo.module.user.presenter;
 
 import android.content.Context;
-import com.wearapay.domain.repository.ILocalRepository;
-import com.wearapay.domain.repository.IUserRepository;
+import com.wearapay.domain.user.IUserMgmt;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.module.user.view.IUserInfoView;
 import javax.inject.Inject;
@@ -13,17 +12,15 @@ import javax.inject.Inject;
 
 public class UserInfoPresenter extends BaseFragmentPresenter<IUserInfoView> {
 
-  private final ILocalRepository localRepository;
-  private final IUserRepository userRepository;
+  private final IUserMgmt userMgmt;
 
-  @Inject public UserInfoPresenter(Context mContext, IUserRepository userRepository,
-      ILocalRepository localRepository) {
+  @Inject
+  public UserInfoPresenter(Context mContext, IUserMgmt userMgmt) {
     super(mContext);
-    this.userRepository = userRepository;
-    this.localRepository = localRepository;
+    this.userMgmt = userMgmt;
   }
 
   public void logout() {
-    localRepository.logout();
+    userMgmt.logout();
   }
 }

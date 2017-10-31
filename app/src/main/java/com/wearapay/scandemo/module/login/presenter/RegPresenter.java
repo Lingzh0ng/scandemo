@@ -1,8 +1,7 @@
 package com.wearapay.scandemo.module.login.presenter;
 
 import android.content.Context;
-import com.wearapay.domain.repository.ILocalRepository;
-import com.wearapay.domain.repository.IUserRepository;
+import com.wearapay.domain.user.IUserMgmt;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.module.login.view.IRegView;
 import javax.inject.Inject;
@@ -13,14 +12,13 @@ import javax.inject.Inject;
 
 public class RegPresenter extends BaseFragmentPresenter<IRegView> {
 
-  private final ILocalRepository localRepository;
-  private final IUserRepository userRepository;
+
+  private final IUserMgmt userMgmt;
 
   @Inject
-  public RegPresenter(Context mContext, IUserRepository userRepository, ILocalRepository localRepository) {
+  public RegPresenter(Context mContext, IUserMgmt userMgmt) {
     super(mContext);
-    this.userRepository = userRepository;
-    this.localRepository = localRepository;
+    this.userMgmt = userMgmt;
   }
 
   public void reg(String username,String password){

@@ -1,7 +1,6 @@
 package com.wearapay.scandemo;
 
-import com.wearapay.domain.repository.ILocalRepository;
-import com.wearapay.domain.repository.IUserRepository;
+import com.wearapay.domain.user.IUserMgmt;
 import javax.inject.Inject;
 
 /**
@@ -9,19 +8,17 @@ import javax.inject.Inject;
  */
 
 public class Dest {
-  IUserRepository repository;
-  ILocalRepository localRepository;
+  IUserMgmt userMgmt;
 
-  @Inject public Dest(IUserRepository repository, ILocalRepository localRepository) {
-    this.repository = repository;
-    this.localRepository = localRepository;
+  @Inject public Dest(IUserMgmt userMgmt) {
+    this.userMgmt = userMgmt;
   }
 
   public String show(String name, String pwd) {
-    return repository.test(name, pwd);
+    return userMgmt.test(name, pwd);
   }
 
   public boolean getLoginStatus(){
-    return localRepository.getLoginStatus();
+    return userMgmt.getLoginStatus();
   }
 }

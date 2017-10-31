@@ -1,4 +1,4 @@
-package com.wearapay.domain;
+package com.wearapay.data;
 
 /**
  * Created by lyz on 2017/10/12.

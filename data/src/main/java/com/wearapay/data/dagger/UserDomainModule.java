@@ -1,17 +1,17 @@
-package com.wearapay.domain.dagger;
+package com.wearapay.data.dagger;
 
 import android.content.Context;
-import com.wearapay.domain.repository.ILocalRepository;
-import com.wearapay.domain.repository.IUserRepository;
-import com.wearapay.domain.repository.LocalRepositoryImpl;
-import com.wearapay.domain.repository.UserNetRepositoryImpl;
+import com.wearapay.data.repository.ILocalRepository;
+import com.wearapay.data.repository.IUserRepository;
+import com.wearapay.data.repository.LocalRepositoryImpl;
+import com.wearapay.data.repository.UserNetRepositoryImpl;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import retrofit2.Retrofit;
 
-import static com.wearapay.domain.DConstant.BASE_URL_1;
+import static com.wearapay.data.DConstant.BASE_URL_1;
 
 /**
  * Created by lyz on 2017/10/12.

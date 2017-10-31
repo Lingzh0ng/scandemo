@@ -1,4 +1,4 @@
-package com.wearapay.domain.repository;
+package com.wearapay.data.repository;
 
 import com.wearapay.base.net.IRepository;
 

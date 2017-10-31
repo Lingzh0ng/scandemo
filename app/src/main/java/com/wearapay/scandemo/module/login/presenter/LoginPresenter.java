@@ -1,8 +1,7 @@
 package com.wearapay.scandemo.module.login.presenter;
 
 import android.content.Context;
-import com.wearapay.domain.repository.ILocalRepository;
-import com.wearapay.domain.repository.IUserRepository;
+import com.wearapay.domain.user.IUserMgmt;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.module.login.view.ILoginView;
 import javax.inject.Inject;
@@ -13,18 +12,21 @@ import javax.inject.Inject;
 
 public class LoginPresenter extends BaseFragmentPresenter<ILoginView> {
 
-  private final ILocalRepository localRepository;
-  private final IUserRepository userRepository;
+  private final IUserMgmt userMgmt;
 
   @Inject
-  public LoginPresenter(Context mContext, IUserRepository userRepository, ILocalRepository localRepository) {
+  public LoginPresenter(Context mContext, IUserMgmt userMgmt) {
     super(mContext);
-    this.userRepository = userRepository;
-    this.localRepository = localRepository;
+    this.userMgmt = userMgmt;
   }
 
   public void login(String username,String password){
-    //wrap(userRepository.login(username,password)).subscribe(new Observer<String>() {
+    //wrap(userRepository.login(username,password)).flatMap(s -> {
+    //  if (s == null) {
+    //    s = "1234";
+    //  }
+    //  return Observable.just(s);
+    //}).subscribe(new Observer<String>() {
     //  @Override public void onSubscribe(@NonNull Disposable d) {
     //
     //  }
@@ -41,7 +43,7 @@ public class LoginPresenter extends BaseFragmentPresenter<ILoginView> {
     //
     //  }
     //});
-    localRepository.login("123456");
+    userMgmt.login("123456");
     view.LoginSuccess();
 
   }

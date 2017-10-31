@@ -1,8 +1,7 @@
 package com.wearapay.scandemo.module.user.presenter;
 
 import android.content.Context;
-import com.wearapay.domain.repository.ILocalRepository;
-import com.wearapay.domain.repository.IUserRepository;
+import com.wearapay.domain.user.IUserMgmt;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.module.user.view.IChangePswView;
 import javax.inject.Inject;
@@ -13,16 +12,13 @@ import javax.inject.Inject;
 
 public class ChangePswPresenter extends BaseFragmentPresenter<IChangePswView> {
 
-  private final ILocalRepository localRepository;
-  private final IUserRepository userRepository;
+  private final IUserMgmt userMgmt;
 
   @Inject
-  public ChangePswPresenter(Context mContext, IUserRepository userRepository, ILocalRepository localRepository) {
+  public ChangePswPresenter(Context mContext, IUserMgmt userMgmt) {
     super(mContext);
-    this.userRepository = userRepository;
-    this.localRepository = localRepository;
+    this.userMgmt = userMgmt;
   }
-
   public void reg(String username,String password){
     //wrap(userRepository.login(username,password)).subscribe(new Observer<String>() {
     //  @Override public void onSubscribe(@NonNull Disposable d) {

@@ -4,8 +4,9 @@ package com.wearapay.scandemo.dagger;
  * Created by lyz on 2017/6/27.
  */
 
-import com.wearapay.domain.dagger.UserDomainModule;
-import com.wearapay.domain.dagger.UserRetrofitModule;
+import com.wearapay.data.dagger.UserDomainModule;
+import com.wearapay.data.dagger.UserRetrofitModule;
+import com.wearapay.domain.user.UserModule;
 import com.wearapay.scandemo.App;
 import com.wearapay.scandemo.MainActivity;
 import com.wearapay.scandemo.module.device.AddDeviceFragment;
@@ -21,7 +22,7 @@ import dagger.Component;
 import javax.inject.Singleton;
 
 @Singleton @Component(modules = {
-    ApplicationModule.class, UserRetrofitModule.class, UserDomainModule.class
+    ApplicationModule.class, UserRetrofitModule.class, UserDomainModule.class, UserModule.class
 }) public interface ApplicationComponent {
   void inject(App application);
 

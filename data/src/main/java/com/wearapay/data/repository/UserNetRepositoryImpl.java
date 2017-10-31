@@ -1,7 +1,7 @@
-package com.wearapay.domain.repository;
+package com.wearapay.data.repository;
 
 import android.content.Context;
-import com.wearapay.domain.retorfit.RestTransactionService;
+import com.wearapay.data.retorfit.RestTransactionService;
 import com.wearapay.net.BaseNetRepositoryModel;
 import io.reactivex.Observable;
 import javax.inject.Singleton;

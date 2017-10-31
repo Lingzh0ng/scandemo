@@ -3,6 +3,8 @@ package com.wearapay.scandemo.base;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +24,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public abstract class BaseActivity extends RxFragmentActivity {
 
+  @ColorRes
   public int getStatusColor() {
     return color;
   }
@@ -71,9 +74,7 @@ public abstract class BaseActivity extends RxFragmentActivity {
     win.setAttributes(winParams);
   }
 
-
-
-  protected abstract int getLayoutId();
+  @LayoutRes protected abstract int getLayoutId();
 
   private boolean isAutoHideInputView = true;
   private boolean isClearFocusWhileAutoHideInputView = false;

@@ -1,11 +1,11 @@
-package com.wearapay.domain.repository;
+package com.wearapay.data.repository;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import static com.wearapay.domain.DConstant.DefaultSP;
-import static com.wearapay.domain.DConstant.SP_login_status;
-import static com.wearapay.domain.DConstant.SP_user_taken;
+import static com.wearapay.data.DConstant.DefaultSP;
+import static com.wearapay.data.DConstant.SP_login_status;
+import static com.wearapay.data.DConstant.SP_user_taken;
 
 /**
  * Created by lyz on 2017/10/23.

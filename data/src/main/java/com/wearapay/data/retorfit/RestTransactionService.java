@@ -1,4 +1,4 @@
-package com.wearapay.domain.retorfit;
+package com.wearapay.data.retorfit;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
