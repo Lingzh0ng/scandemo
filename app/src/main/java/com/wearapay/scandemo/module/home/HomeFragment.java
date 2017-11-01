@@ -80,7 +80,6 @@ public class HomeFragment extends BaseMvpFragment implements IHomeView {
     }
   }
 
-
   @Override protected void OnClickMenu() {
     super.OnClickMenu();
     //ToastUtils.showShort("help");
@@ -108,6 +107,28 @@ public class HomeFragment extends BaseMvpFragment implements IHomeView {
     } else {
       startActivityForResult(new Intent(getContext(), SimpleScanActivity.class), 1);
     }
+   /* ApiManager.get()
+        .getTestNetRepositoryModel()
+        .login("get_community")
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Observer<String>() {
+          @Override public void onSubscribe(Disposable d) {
+            System.out.println(d);
+          }
+
+          @Override public void onNext(String s) {
+            System.out.println(s);
+          }
+
+          @Override public void onError(Throwable e) {
+            System.out.println(e);
+          }
+
+          @Override public void onComplete() {
+            System.out.println("onComplete");
+          }
+        });*/
   }
 
   @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,

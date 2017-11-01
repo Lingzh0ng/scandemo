@@ -3,6 +3,8 @@ package com.wearapay.net;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.wearapay.net.converter.PPRestConverterFactory;
+import com.wearapay.net.handler.DefaultHandle;
 import com.wearapay.net.handler.RequestHandler;
 
 import java.io.File;
@@ -36,14 +38,23 @@ public class RetrofitManager {
         return RetrofitManagerHolder.instance;
     }
 
-    public Retrofit getRetrofit(Context context, RequestHandler handler, String url) {
-        System.out.println("getRetrofit");
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(url)
+    public Retrofit getRetrofit(Context context, String baseUrl) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+            .client(getOkHttpClient(context, new DefaultHandle()))
+            .addConverterFactory(GsonConverterFactory.create(new Gson()))
+            .addConverterFactory(PPRestConverterFactory.create(new Gson()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build();
+        return retrofit;
+    }
+
+    public Retrofit getRetrofit(Context context, RequestHandler handler, String baseUrl) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .client(getOkHttpClient(context, handler))
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addConverterFactory(PPRestConverterFactory.create(new Gson()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        System.out.println("retrofit : " + retrofit);
         return retrofit;
     }
 

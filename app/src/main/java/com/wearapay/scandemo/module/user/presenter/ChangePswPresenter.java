@@ -2,6 +2,7 @@ package com.wearapay.scandemo.module.user.presenter;
 
 import android.content.Context;
 import com.wearapay.domain.user.IUserMgmt;
+import com.wearapay.net.BaseObserver;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.module.user.view.IChangePswView;
 import javax.inject.Inject;
@@ -19,24 +20,19 @@ public class ChangePswPresenter extends BaseFragmentPresenter<IChangePswView> {
     super(mContext);
     this.userMgmt = userMgmt;
   }
-  public void reg(String username,String password){
-    //wrap(userRepository.login(username,password)).subscribe(new Observer<String>() {
-    //  @Override public void onSubscribe(@NonNull Disposable d) {
-    //
-    //  }
-    //
-    //  @Override public void onNext(@NonNull String s) {
-    //
-    //  }
-    //
-    //  @Override public void onError(@NonNull Throwable e) {
-    //
-    //  }
-    //
-    //  @Override public void onComplete() {
-    //
-    //  }
-    //});
+  public void changePsw(String username,String password){
+    view.showProgress("");
+    wrap(userMgmt.changePassword(username, password, password, username)).subscribe(
+        new BaseObserver<Boolean>(view) {
+
+          @Override public void onNext(Boolean aBoolean) {
+            //view.();
+          }
+
+          @Override protected void handlerError(Throwable e) {
+            //view.RegFailure();
+          }
+        });
 
 
   }

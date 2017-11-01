@@ -6,7 +6,7 @@ package com.wearapay.scandemo.dagger;
 
 import com.wearapay.data.dagger.UserDomainModule;
 import com.wearapay.data.dagger.UserRetrofitModule;
-import com.wearapay.domain.user.UserModule;
+import com.wearapay.domain.UserModule;
 import com.wearapay.scandemo.App;
 import com.wearapay.scandemo.MainActivity;
 import com.wearapay.scandemo.module.device.AddDeviceFragment;

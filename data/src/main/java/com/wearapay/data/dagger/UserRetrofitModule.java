@@ -28,9 +28,7 @@ public class UserRetrofitModule {
     @Singleton
     @Named(BASE_URL)
     Retrofit provideIWeatherRestService(Context context, @Named(DConstant.DefaultHandle) DefaultHandle handle) {
-        System.out.println("provideIWeatherRest2Service");
         Retrofit retrofit = RetrofitManager.get().getRetrofit(context, handle, BASE_URL);
-        System.out.println("retrofit : " + (retrofit == null) + BASE_URL_1);
         return retrofit;
     }
 
@@ -38,9 +36,7 @@ public class UserRetrofitModule {
     @Singleton
     @Named(BASE_URL_1)
     Retrofit provideIWeatherRest2Service(Context context, @Named(DConstant.DefaultHandle) DefaultHandle handle) {
-        System.out.println("provideIWeatherRest2Service");
         Retrofit retrofit = RetrofitManager.get().getRetrofit(context, handle, BASE_URL_1);
-        System.out.println("retrofit : " + (retrofit == null) + BASE_URL_1);
         return retrofit;
     }
 

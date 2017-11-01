@@ -36,12 +36,10 @@ public class App extends Application {
     registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
       @Override public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         activityList.add(activity);
-        //System.out.println("onActivityCreated:" + activity.getClass().getSimpleName());
       }
 
       @Override public void onActivityStarted(Activity activity) {
         activityStatus++;
-        //System.out.println("onActivityStarted:" + activity.getClass().getSimpleName());
       }
 
       @Override public void onActivityResumed(Activity activity) {
@@ -54,19 +52,17 @@ public class App extends Application {
 
       @Override public void onActivityStopped(Activity activity) {
         activityStatus--;
-        //System.out.println("onActivityStopped:" + activity.getClass().getSimpleName());
       }
 
       @Override public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        //System.out.println("onActivitySaveInstanceState:" + activity.getClass().getSimpleName());
       }
 
       @Override public void onActivityDestroyed(Activity activity) {
         activityList.remove(activity);
-        //System.out.println("onActivityDestroyed:" + activity.getClass().getSimpleName());
       }
     });
 
+    //ApiManager.get().init(this);
   }
 
   public ApplicationComponent getComponent() {

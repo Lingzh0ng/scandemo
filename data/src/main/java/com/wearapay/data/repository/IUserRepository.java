@@ -8,7 +8,14 @@ import io.reactivex.Observable;
  */
 
 public interface IUserRepository extends IRepository {
-  Observable<String> login(String name, String pwd);
+  Observable<String> login(String loginId, String password);
+
+  Observable<Void> register(String loginId, String password1, String password2, String nickname);
+
+  Observable<Void> changePassword(String token, String password, String password1,
+      String password2);
+
+  Observable<Void> logout(String token);
 
   String test(String name, String pwd);
 }

@@ -11,11 +11,16 @@ public interface IUserMgmt {
 
   void updateLoginStatus(boolean status);
 
-  void logout();
+  Observable<Boolean> logout();
 
-  void login(String taken);
+  //Observable<Boolean> login(String taken);
 
   Observable<String> login(String name, String pwd);
 
   String test(String name, String pwd);
+
+  Observable<Boolean> register(String loginId, String password1, String password2, String nickname);
+
+  Observable<Boolean> changePassword(String password, String password1,
+      String password2);
 }

@@ -98,7 +98,7 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
     if (!TextUtils.isEmpty(pwd) && !pwd.equals(pwd2)) {
       showMessage("两次密码输入不一致");
     } else {
-      regPresenter.reg("", "");
+      regPresenter.reg(name, pwd);
     }
   }
 

@@ -1,6 +1,8 @@
 package com.wearapay.data.dagger;
 
 import android.content.Context;
+import com.wearapay.data.repository.DeviceRepositoryImpl;
+import com.wearapay.data.repository.IDeviceRepository;
 import com.wearapay.data.repository.ILocalRepository;
 import com.wearapay.data.repository.IUserRepository;
 import com.wearapay.data.repository.LocalRepositoryImpl;
@@ -25,5 +27,10 @@ import static com.wearapay.data.DConstant.BASE_URL_1;
 
   @Provides @Singleton ILocalRepository provideILocalRepository(Context context) {
     return new LocalRepositoryImpl(context);
+  }
+
+  @Provides @Singleton IDeviceRepository provideIDeviceRepository(
+      @Named(BASE_URL_1) Retrofit retrofit, Context context) {
+    return new DeviceRepositoryImpl(context, retrofit);
   }
 }

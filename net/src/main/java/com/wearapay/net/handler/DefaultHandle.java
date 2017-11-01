@@ -11,9 +11,10 @@ import okhttp3.Response;
 
 public class DefaultHandle implements RequestHandler {
   @Override public Request onBeforeRequest(Request request, Interceptor.Chain chain) {
-    return chain.request().newBuilder()
-        .addHeader("X-Auth-Token","")
-        .addHeader("Authorization", "")
+    Request.Builder builder = chain.request().newBuilder();
+    return builder.addHeader("header1", "")
+        .addHeader("header2", "")
+        .addHeader("header3", "")
         .build();
   }
 
