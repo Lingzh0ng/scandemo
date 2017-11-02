@@ -12,10 +12,10 @@ import okhttp3.Response;
 public class DefaultHandle implements RequestHandler {
   @Override public Request onBeforeRequest(Request request, Interceptor.Chain chain) {
     Request.Builder builder = chain.request().newBuilder();
-    return builder.addHeader("header1", "")
+    return builder./*addHeader("header1", "")
         .addHeader("header2", "")
-        .addHeader("header3", "")
-        .build();
+        .addHeader("header3", "").*/
+        build();
   }
 
   @Override public Response onAfterRequest(Response response, Interceptor.Chain chain)

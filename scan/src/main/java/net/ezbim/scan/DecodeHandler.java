@@ -132,6 +132,7 @@ final class DecodeHandler extends Handler {
             || sym.getType() == Symbol.UPCE
             || sym.getType() == Symbol.PDF417) {
           resultStr = sym.getData();
+          System.out.println(resultStr);
         }
       }
     }
@@ -173,9 +174,16 @@ final class DecodeHandler extends Handler {
         }
 
         if (null != capturedDecoder.getHandler()) {
+          boolean b = resultStr.contains("#") && resultStr.contains("*");
           Message msg = new Message();
-          msg.obj = resultStr;
-          msg.what = ZBarState.ZBAR_DECODE_SUCCEEDED.value();
+          if (b) {
+            msg.obj = resultStr;
+            msg.what = ZBarState.ZBAR_DECODE_SUCCEEDED.value();
+          } else {
+            //不是规范的二维码
+            System.out.println("不是规范的二维码");
+            msg.what = ZBarState.ZBAR_RESTART_PREVIEW.value();
+          }
           capturedDecoder.getHandler().sendMessage(msg);
         }
       } else {

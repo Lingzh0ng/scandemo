@@ -1,16 +1,13 @@
 package com.wearapay.net;
 
 import android.content.Context;
-
 import com.google.gson.Gson;
 import com.wearapay.net.converter.PPRestConverterFactory;
 import com.wearapay.net.handler.DefaultHandle;
 import com.wearapay.net.handler.RequestHandler;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -19,7 +16,6 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by lyz on 2017/10/11.
@@ -41,7 +37,7 @@ public class RetrofitManager {
     public Retrofit getRetrofit(Context context, String baseUrl) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
             .client(getOkHttpClient(context, new DefaultHandle()))
-            .addConverterFactory(GsonConverterFactory.create(new Gson()))
+            //.addConverterFactory(GsonConverterFactory.create(new Gson()))
             .addConverterFactory(PPRestConverterFactory.create(new Gson()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();
@@ -51,7 +47,7 @@ public class RetrofitManager {
     public Retrofit getRetrofit(Context context, RequestHandler handler, String baseUrl) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .client(getOkHttpClient(context, handler))
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                //.addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .addConverterFactory(PPRestConverterFactory.create(new Gson()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

@@ -71,7 +71,7 @@ public final class CapturedDecoderHandler extends Handler {
     }
 
     private void restartPreviewAndDecode() {
-        if (state == State.SUCCESS) {
+        if (state == State.SUCCESS || state == State.PREVIEW) {
             state = State.PREVIEW;
             CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), ZBarState.ZBAR_DECODE.value());
             CameraManager.get().requestAutoFocus(this, ZBarState.ZBAR_AUTO_FOCUS.value());

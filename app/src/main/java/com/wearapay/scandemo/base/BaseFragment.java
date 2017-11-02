@@ -98,9 +98,9 @@ public abstract class BaseFragment extends RxFragment {
       appbar.setBackgroundResource(colorId);
     }
 
-    System.out.println("colorId:" + getResources().getColor(colorId));
-    System.out.println("colorId:" + getResources().getColor(R.color.status_bar_bg));
-    System.out.println("colorId:" + getResources().getColor(R.color.test_color));
+    //System.out.println("colorId:" + getResources().getColor(colorId));
+    //System.out.println("colorId:" + getResources().getColor(R.color.status_bar_bg));
+    //System.out.println("colorId:" + getResources().getColor(R.color.test_color));
   }
 
   private View.OnClickListener innerOnClickListener = new View.OnClickListener() {

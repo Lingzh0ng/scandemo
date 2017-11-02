@@ -6,6 +6,12 @@ import com.wearapay.scandemo.base.mvp.IBaseRxView;
  * Created by lyz on 2017/10/23.
  */
 
-public interface IHomeView extends IBaseRxView{
+public interface IHomeView extends IBaseRxView {
+  void showWaitProgress();
 
+  void dismissWaitProgress();
+
+  void unDeviceSuccess();
+
+  void unDeviceFail();
 }

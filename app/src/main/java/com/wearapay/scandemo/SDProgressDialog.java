@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -32,13 +34,13 @@ public class SDProgressDialog extends ProgressDialog {
     setContentView(R.layout.progress_dialog);
     getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     ivProgress = (ImageView) findViewById(R.id.ivProgress);
-    //tvMessage = (TextView) findViewById(R.id.tvProgressMsg);
-    //if (!StringUtil.isEmpty(message)) {
-    //  tvMessage.setVisibility(View.VISIBLE);
-    //  tvMessage.setText(this.message);
-    //} else {
-    //  tvMessage.setVisibility(View.GONE);
-    //}
+    tvMessage = (TextView) findViewById(R.id.tvProgressMsg);
+    if (!TextUtils.isEmpty(message)) {
+      tvMessage.setVisibility(View.VISIBLE);
+      tvMessage.setText(this.message);
+    } else {
+      tvMessage.setVisibility(View.GONE);
+    }
     animation =
         new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
             0.5f);

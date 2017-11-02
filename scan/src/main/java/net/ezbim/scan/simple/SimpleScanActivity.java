@@ -270,6 +270,7 @@ public class SimpleScanActivity extends AppCompatActivity
   @Override public void handleDecode(String result) {
     inactivityTimer.onActivity();
     playBeepSoundAndVibrate();
+    System.out.println("result:" + result);
     if (!TextUtils.isEmpty(result)) {
       Intent data = new Intent();
       data.putExtra(SIMPLE_SCAN_RESULT, result);

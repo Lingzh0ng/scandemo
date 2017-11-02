@@ -2,6 +2,7 @@ package com.wearapay.net.converter;
 
 import com.google.gson.Gson;
 import com.wearapay.base.BaseBean;
+import com.wearapay.net.Exception.NotLoginException;
 import com.wearapay.net.Exception.PPCodedException;
 import java.io.Closeable;
 import java.io.IOException;
@@ -36,10 +37,16 @@ final class PPRestResponseBodyConverter<T> implements Converter<ResponseBody, T>
 
     BaseBean result = gson.fromJson(responseStr, BaseBean.class);
     if (result.isSuccess()) {
-      if (result.getData() == null) return null;
+      if (result.getData() == null) {
+        return null;
+      }
       return gson.fromJson(gson.toJson(result.getData()), type);
     } else {
-      throw new PPCodedException(result.getCode(),result.getMsg());
+      if (result.getCode().equals("not-login")) {
+        throw new NotLoginException(result.getMsg());
+      } else {
+        throw new PPCodedException(result.getCode(), result.getMsg());
+      }
     }
   }
 }

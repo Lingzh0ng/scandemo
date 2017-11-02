@@ -68,7 +68,9 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
   }
 
   private void initView() {
-
+    cellPassword.setTextWatcher(watcher);
+    cellUserName.setTextWatcher(watcher);
+    cellSurePassword.setTextWatcher(watcher);
   }
 
   private SimpleTextWatcher watcher = new SimpleTextWatcher() {

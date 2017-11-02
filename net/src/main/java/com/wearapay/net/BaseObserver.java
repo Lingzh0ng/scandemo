@@ -36,6 +36,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     if (e instanceof NotLoginException) {
       //context.startActivity(new Intent(context, LoginActivity.class));
       view.showMessage("请登录");
+      view.navToLoginPage();
       return;
     } else if (e instanceof java.net.ConnectException
         || e instanceof java.net.SocketTimeoutException) {

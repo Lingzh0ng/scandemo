@@ -56,7 +56,7 @@
           android:background="@color/white"
           android:gravity="center"
           android:lines="1"
-          android:text="@string/app_name"
+          android:text="用户"
           android:textColor="@color/text_color_primary"
           />
 
@@ -68,7 +68,7 @@
           android:background="@color/white"
           android:gravity="center"
           android:lines="1"
-          android:text="@string/app_name"
+          android:text="设备编号"
           android:textColor="@color/text_color_primary"
           />
       <TextView
@@ -78,7 +78,7 @@
           android:background="@color/white"
           android:gravity="center"
           android:lines="1"
-          android:text="@string/app_name"
+          android:text="时间"
           android:textColor="@color/text_color_primary"
           />
     </LinearLayout>

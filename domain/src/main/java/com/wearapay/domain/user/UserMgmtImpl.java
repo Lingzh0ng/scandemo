@@ -39,10 +39,14 @@ public class UserMgmtImpl implements IUserMgmt {
     return iUserRepository.logout(iLocalRepository.getUserTaken())
         .flatMap(new Function<Void, ObservableSource<Boolean>>() {
           @Override public ObservableSource<Boolean> apply(Void aVoid) throws Exception {
-            iLocalRepository.logout();
+            logoutLocal();
             return Observable.just(true);
           }
         });
+  }
+
+  @Override public void logoutLocal() {
+        iLocalRepository.logout();
   }
 
   @Override public Observable<String> login(String name, String pwd) {

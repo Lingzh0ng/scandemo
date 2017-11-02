@@ -13,7 +13,7 @@ public interface IUserMgmt {
 
   Observable<Boolean> logout();
 
-  //Observable<Boolean> login(String taken);
+  void logoutLocal();
 
   Observable<String> login(String name, String pwd);
 

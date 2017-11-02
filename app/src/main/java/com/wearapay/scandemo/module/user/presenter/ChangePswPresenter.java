@@ -20,17 +20,17 @@ public class ChangePswPresenter extends BaseFragmentPresenter<IChangePswView> {
     super(mContext);
     this.userMgmt = userMgmt;
   }
-  public void changePsw(String username,String password){
+  public void changePsw(String oldPwd,String password){
     view.showProgress("");
-    wrap(userMgmt.changePassword(username, password, password, username)).subscribe(
+    wrap(userMgmt.changePassword(oldPwd, password, password)).subscribe(
         new BaseObserver<Boolean>(view) {
 
           @Override public void onNext(Boolean aBoolean) {
-            //view.();
+            view.ChangePswSuccess();
           }
 
           @Override protected void handlerError(Throwable e) {
-            //view.RegFailure();
+            view.ChangePswFailure();
           }
         });
 

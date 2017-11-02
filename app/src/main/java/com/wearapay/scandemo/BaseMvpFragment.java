@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import com.wearapay.base.utils.L;
+import com.wearapay.domain.user.IUserMgmt;
 import com.wearapay.scandemo.base.BaseActivity;
 import com.wearapay.scandemo.base.BaseFragment;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
@@ -16,6 +17,7 @@ import com.wearapay.scandemo.base.mvp.IBaseRxView;
 import com.wearapay.scandemo.module.home.HomeActivity;
 import com.wearapay.scandemo.utils.ActivityUtils;
 import com.wearapay.scandemo.utils.ToastUtils;
+import javax.inject.Inject;
 
 /**
  * Created by lyz on 2017/10/13.
@@ -27,11 +29,14 @@ public abstract class BaseMvpFragment extends BaseFragment implements IBaseRxVie
 
   protected abstract BaseFragmentPresenter[] initPresenters();
 
+  @Inject IUserMgmt userMgmt;
+
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     View view = super.onCreateView(inflater, container, savedInstanceState);
     ButterKnife.bind(this, view);
+    App.app.getComponent().inject(this);
     return view;
   }
 
@@ -108,6 +113,7 @@ public abstract class BaseMvpFragment extends BaseFragment implements IBaseRxVie
   }
 
   @Override public void navToLoginPage() {
+    userMgmt.logoutLocal();
     Bundle bundle = ActivityUtils.getBundle(R.color.test_color, "登录", false, true);
     ActivityUtils.startFragment(getActivity(), AppConstant.FragmentType.Login, bundle);
   }

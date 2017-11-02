@@ -94,9 +94,8 @@ public class UserInfoFragment extends BaseMvpFragment implements IUserInfoView{
         break;
       case R.id.btnLogout:
         userInfoPresenter.logout();
-        //ToastUtils.showShort("退出登录");
-        bundle = ActivityUtils.getBundle("登录", false, true);
-        ActivityUtils.startFragment(getActivity(), AppConstant.FragmentType.Login, bundle);
+        break;
+      default:
         break;
     }
   }
