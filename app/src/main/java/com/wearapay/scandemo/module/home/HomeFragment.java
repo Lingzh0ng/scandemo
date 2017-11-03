@@ -38,6 +38,8 @@ import static net.ezbim.scan.simple.SimpleScanActivity.SIMPLE_SCAN_RESULT;
  */
 
 public class HomeFragment extends BaseMvpFragment implements IHomeView {
+  private static final int WRITE_COARSE_LOCATION_REQUEST_CODE = 1000;
+  private static final int CAMERA_REQUEST_CODE = 1;
   @BindView(R.id.tvData) TextView tvData;
   @BindView(R.id.btnScan) ImageView btnScan;
   Unbinder unbinder;
@@ -104,7 +106,15 @@ public class HomeFragment extends BaseMvpFragment implements IHomeView {
       deviceNo = data.getStringExtra(SIMPLE_SCAN_RESULT);
       ToastUtils.showShort(deviceNo);
       tvData.setText(deviceNo);
+      //if (ContextCompat.checkSelfPermission(getActivity(),
+      //    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      //  //申请WRITE_EXTERNAL_STORAGE权限
+      //  ActivityCompat.requestPermissions(getActivity(),
+      //      new String[] { Manifest.permission.ACCESS_COARSE_LOCATION },
+      //      WRITE_COARSE_LOCATION_REQUEST_CODE);//自定义的code
+      //} else {
       homePresenter.unDevice(deviceNo.split("\\*")[1]);
+      //}
     }
   }
 
@@ -120,42 +130,33 @@ public class HomeFragment extends BaseMvpFragment implements IHomeView {
     }
     int flag = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
     if (flag != PackageManager.PERMISSION_GRANTED) {
-      ActivityCompat.requestPermissions(getActivity(), new String[] { Manifest.permission.CAMERA },
-          1);
+      ActivityCompat.requestPermissions(getActivity(), new String[] {
+          Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION,
+          Manifest.permission.ACCESS_FINE_LOCATION
+      }, CAMERA_REQUEST_CODE);
     } else {
       startActivityForResult(new Intent(getContext(), SimpleScanActivity.class), 1);
     }
-   /* ApiManager.get()
-        .getTestNetRepositoryModel()
-        .login("get_community")
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<String>() {
-          @Override public void onSubscribe(Disposable d) {
-            System.out.println(d);
-          }
-
-          @Override public void onNext(String s) {
-            System.out.println(s);
-          }
-
-          @Override public void onError(Throwable e) {
-            System.out.println(e);
-          }
-
-          @Override public void onComplete() {
-            System.out.println("onComplete");
-          }
-        });*/
   }
 
   @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-      startActivityForResult(new Intent(getContext(), SimpleScanActivity.class), 1);
-    } else {
-      ToastUtils.showLong("请去权限列表开启相机权限");
+    switch (requestCode) {
+      case CAMERA_REQUEST_CODE:
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+          if (grantResults[1] == PackageManager.PERMISSION_GRANTED || grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+            startActivityForResult(new Intent(getContext(), SimpleScanActivity.class), 1);
+          } else {
+            ToastUtils.showLong("请去权限列表开启位置权限");
+          }
+        } else {
+          ToastUtils.showLong("请去权限列表开启相机权限");
+        }
+
+        break;
+      default:
+        break;
     }
   }
 

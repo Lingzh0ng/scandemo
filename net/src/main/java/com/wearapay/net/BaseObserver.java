@@ -20,7 +20,6 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
   public BaseObserver(IBaseView baseView) {
     this.view = baseView;
-    //this.context = view.getUseContext();
     view.showProgress("");
   }
 
@@ -29,7 +28,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
   }
 
   @Override public void onError(@NonNull Throwable e) {
-    if (view != null) {
+    if (view != null && isHideProgress()) {
       view.hideProgress();
     }
     e.printStackTrace();
@@ -40,10 +39,6 @@ public abstract class BaseObserver<T> implements Observer<T> {
       return;
     } else if (e instanceof java.net.ConnectException
         || e instanceof java.net.SocketTimeoutException) {
-      //int id = ResourceUtil.getStringId(context, LConsts.ERROR_NETWORK);
-      //if (id > 0) {
-      //  ToastUtils.showShortSafe(id);
-      //}
       view.showMessage("网络错误");
     } else if (e instanceof PPCodedException) {
       PPCodedException codedException = (PPCodedException) e;
@@ -61,8 +56,12 @@ public abstract class BaseObserver<T> implements Observer<T> {
   }
 
   @Override public void onComplete() {
-    if (view != null) {
+    if (view != null && isHideProgress()) {
       view.hideProgress();
     }
+  }
+
+  public boolean isHideProgress() {
+    return true;
   }
 }

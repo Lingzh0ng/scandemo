@@ -19,7 +19,7 @@ public class DeviceMgmtImpl implements IDeviceMgmt {
     this.iDeviceRepository = iDeviceRepository;
   }
 
-  @Override public Observable<String> unlock(String deviceNo) {
+  @Override public Observable<String> unlock(String deviceNo,double jd,double wd) {
     return iDeviceRepository.unlock(iLocalRepository.getUserTaken(), deviceNo);
   }
 

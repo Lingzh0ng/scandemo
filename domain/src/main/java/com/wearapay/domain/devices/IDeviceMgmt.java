@@ -8,7 +8,7 @@ import io.reactivex.Observable;
  */
 
 public interface IDeviceMgmt {
-  Observable<String> unlock(String deviceNo);
+  Observable<String> unlock(String deviceNo,double jd,double wd);
 
   Observable<DeviceStatus> queryRequest(String reqId);
 }

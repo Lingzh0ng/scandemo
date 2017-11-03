@@ -7,7 +7,7 @@ import android.content.Context;
  */
 
 public class BasePresenter<T> {
-    private Context mContext;
+    protected Context mContext;
     protected T view;
 
     public BasePresenter(Context mContext) {
