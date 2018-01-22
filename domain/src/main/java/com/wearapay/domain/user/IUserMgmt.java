@@ -1,5 +1,6 @@
 package com.wearapay.domain.user;
 
+import com.wearapay.data.bean.VerifyCodeRegister;
 import io.reactivex.Observable;
 
 public interface IUserMgmt {
@@ -23,4 +24,16 @@ public interface IUserMgmt {
 
   Observable<Boolean> changePassword(String password, String password1,
       String password2);
+
+  Observable<Boolean> verifyCodeRegister(VerifyCodeRegister verifyCodeRegister);
+
+  Observable<Boolean> requestRegisterCode(String number);
+
+  Observable<Boolean> verifyCodeRegister2(
+      String loginId, String password1,
+      String password2,  String nickname,String verifyCode);
+
+  void saveDeviceNo(String deviceNo);
+
+  String getDeviceNo();
 }

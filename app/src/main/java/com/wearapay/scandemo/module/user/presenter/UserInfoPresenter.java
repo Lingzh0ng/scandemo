@@ -39,4 +39,8 @@ public class UserInfoPresenter extends BaseFragmentPresenter<IUserInfoView> {
       }
     });
   }
+
+  public String getDeviceNo(){
+    return userMgmt.getDeviceNo();
+  }
 }

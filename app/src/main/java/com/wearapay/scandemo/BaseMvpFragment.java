@@ -69,7 +69,7 @@ public abstract class BaseMvpFragment extends BaseFragment implements IBaseRxVie
   }
 
   @Override public void showMessage(String message) {
-    ToastUtils.showShort(message);
+    ToastUtils.showLong(message);
   }
 
   @Override public void showMessage(int messageId) {

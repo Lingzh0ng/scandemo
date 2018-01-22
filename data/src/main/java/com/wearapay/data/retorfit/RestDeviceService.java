@@ -1,6 +1,5 @@
 package com.wearapay.data.retorfit;
 
-import com.wearapay.data.bean.DeviceStatus;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -11,10 +10,14 @@ import retrofit2.http.POST;
  */
 public interface RestDeviceService {
   @FormUrlEncoded
-  @POST("/api/device/unlock") Observable<String> unlock(@Field("token") String token,
-      @Field("deviceNo") String deviceNo);
+  @POST("api/device/unlock2") Observable<Boolean> unlock(@Field("token") String token,
+      @Field("deviceNo") String deviceNo,@Field("latitude") double latitude,@Field("longitude") double longitude);
 
   @FormUrlEncoded
-  @POST("/api/device/queryRequest") Observable<DeviceStatus> queryRequest(@Field("token") String token,
-      @Field("reqId") String reqId);
+  @POST("api/device/getState2") Observable<Integer> getDeviceStatus(@Field("token") String token,
+      @Field("deviceNo") String reqId);
+
+  @FormUrlEncoded
+  @POST("api/device/getLockState2") Observable<Integer> queryRequest(@Field("token") String token,
+      @Field("deviceNo") String reqId);
 }

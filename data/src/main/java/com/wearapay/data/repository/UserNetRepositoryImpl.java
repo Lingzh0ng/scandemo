@@ -1,6 +1,7 @@
 package com.wearapay.data.repository;
 
 import android.content.Context;
+import com.wearapay.data.bean.VerifyCodeRegister;
 import com.wearapay.data.retorfit.RestUserService;
 import com.wearapay.net.BaseNetRepositoryModel;
 import io.reactivex.Observable;
@@ -37,6 +38,20 @@ import retrofit2.Retrofit;
 
   @Override public Observable<Void> logout(String token) {
     return getService().logout(token);
+  }
+
+  @Override public Observable<Void> verifyCodeRegister(VerifyCodeRegister verifyCodeRegister) {
+    return getService().verifyCodeRegister(verifyCodeRegister);
+  }
+
+  @Override public Observable<Void> requestRegisterCode(String number) {
+    return getService().requestRegisterCode(number);
+  }
+
+  @Override
+  public Observable<Void> verifyCodeRegister2(String loginId, String password1, String password2,
+      String nickname, String verifyCode) {
+    return getService().verifyCodeRegister2(loginId,password1,password2,nickname,verifyCode);
   }
 
   @Override public String test(String name, String pwd) {

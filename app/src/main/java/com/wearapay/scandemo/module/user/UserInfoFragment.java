@@ -2,6 +2,7 @@ package com.wearapay.scandemo.module.user;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class UserInfoFragment extends BaseMvpFragment implements IUserInfoView{
   Unbinder unbinder;
 
   @Inject UserInfoPresenter userInfoPresenter;
+  private String deviceNo;
 
   @Override public void onCleanBeforeDetach() {
 
@@ -61,6 +63,14 @@ public class UserInfoFragment extends BaseMvpFragment implements IUserInfoView{
     View rootView = super.onCreateView(inflater, container, savedInstanceState);
     unbinder = ButterKnife.bind(this, rootView);
     return rootView;
+  }
+
+  @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    deviceNo = userInfoPresenter.getDeviceNo();
+    if (!TextUtils.isEmpty(deviceNo)) {
+      cellDeviceNo.setSubTitle(deviceNo);
+    }
   }
 
   @Override public void onDestroyView() {

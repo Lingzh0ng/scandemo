@@ -18,4 +18,8 @@ public interface ILocalRepository extends IRepository {
   void logout();
 
   void login(String taken);
+
+  void saveDeviceNo(String deviceNo);
+
+  String getDeviceNo();
 }

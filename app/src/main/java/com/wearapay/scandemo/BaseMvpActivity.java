@@ -108,12 +108,12 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseRxVie
 
     @Override
     public void showMessage(String message) {
-        ToastUtils.showShort(message);
+        ToastUtils.showLong(message);
     }
 
     @Override
     public void showMessage(int messageId) {
-        ToastUtils.showShort(messageId);
+        ToastUtils.showLong(messageId);
     }
 
     @Override

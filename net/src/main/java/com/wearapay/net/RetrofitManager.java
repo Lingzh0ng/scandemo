@@ -45,6 +45,7 @@ public class RetrofitManager {
     }
 
     public Retrofit getRetrofit(Context context, RequestHandler handler, String baseUrl) {
+        System.out.println("baseUrl = " + baseUrl);
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .client(getOkHttpClient(context, handler))
                 //.addConverterFactory(GsonConverterFactory.create(new Gson()))

@@ -1,7 +1,6 @@
 package com.wearapay.data.repository;
 
 import com.wearapay.base.net.IRepository;
-import com.wearapay.data.bean.DeviceStatus;
 import io.reactivex.Observable;
 
 /**
@@ -9,7 +8,9 @@ import io.reactivex.Observable;
  */
 
 public interface IDeviceRepository extends IRepository {
-  Observable<String> unlock(String token, String deviceNo);
+  Observable<Boolean> unlock(String token, String deviceNo,double latitude, double longitude);
 
-  Observable<DeviceStatus> queryRequest(String token, String reqId);
+  Observable<Integer> queryRequest(String token, String reqId);
+
+  Observable<Integer> getDeviceStatus(String token, String reqId);
 }

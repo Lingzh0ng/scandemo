@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.wearapay.scandemo.dagger.ApplicationComponent;
 import com.wearapay.scandemo.dagger.ApplicationModule;
 import com.wearapay.scandemo.dagger.DaggerApplicationComponent;
+import com.wearapay.scandemo.module.home.HomeActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,16 @@ public class App extends Application {
   public Activity getCurrentActivity() {
     return activityList.get(activityList.size() - 1);
   }
+
+  public Activity getHomeActivity() {
+    for (int i = 0; i < activityList.size(); i++) {
+      if (activityList.get(i) instanceof HomeActivity) {
+        return activityList.get(i);
+      }
+    }
+    return null;
+  }
+
 
   public boolean isAppHide() {
     return activityStatus == 1;

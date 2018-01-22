@@ -26,7 +26,7 @@ public abstract class BaseNetRepositoryModel<T> extends BaseRepositoryModel {
     service = initRetrofitClient(context);
   }
 
-  public Class<T> getServiceType() {
+  @Override public Class<T> getServiceType() {
     Class<T> entityClass = null;
     Type t = getClass().getGenericSuperclass();
     Type[] p = ((ParameterizedType) t).getActualTypeArguments();
@@ -34,5 +34,5 @@ public abstract class BaseNetRepositoryModel<T> extends BaseRepositoryModel {
     return entityClass;
   }
 
-  protected abstract T initRetrofitClient(Context context);
+  @Override protected abstract T initRetrofitClient(Context context);
 }

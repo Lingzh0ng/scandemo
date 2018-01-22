@@ -1,6 +1,5 @@
 package com.wearapay.domain.devices;
 
-import com.wearapay.data.bean.DeviceStatus;
 import com.wearapay.data.repository.IDeviceRepository;
 import com.wearapay.data.repository.ILocalRepository;
 import io.reactivex.Observable;
@@ -19,11 +18,15 @@ public class DeviceMgmtImpl implements IDeviceMgmt {
     this.iDeviceRepository = iDeviceRepository;
   }
 
-  @Override public Observable<String> unlock(String deviceNo,double jd,double wd) {
-    return iDeviceRepository.unlock(iLocalRepository.getUserTaken(), deviceNo);
+  @Override public Observable<Boolean> unlock(String deviceNo,double latitude,double longitude) {
+    return iDeviceRepository.unlock(iLocalRepository.getUserTaken(), deviceNo,latitude,longitude);
   }
 
-  @Override public Observable<DeviceStatus> queryRequest(String reqId) {
+  @Override public Observable<Integer> queryRequest(String reqId) {
     return iDeviceRepository.queryRequest(iLocalRepository.getUserTaken(), reqId);
+  }
+
+  @Override public Observable<Integer> getDeviceStatus(String reqId) {
+    return iDeviceRepository.getDeviceStatus(iLocalRepository.getUserTaken(),reqId);
   }
 }

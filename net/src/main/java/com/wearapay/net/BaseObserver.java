@@ -19,8 +19,14 @@ public abstract class BaseObserver<T> implements Observer<T> {
   private IBaseView view;
 
   public BaseObserver(IBaseView baseView) {
+   this(baseView,true);
+  }
+
+  public BaseObserver(IBaseView baseView,boolean show) {
     this.view = baseView;
-    view.showProgress("");
+    if (show) {
+      view.showProgress("");
+    }
   }
 
   @Override public void onSubscribe(@NonNull Disposable d) {

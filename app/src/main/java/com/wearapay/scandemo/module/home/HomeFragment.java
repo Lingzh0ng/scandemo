@@ -86,6 +86,8 @@ public class HomeFragment extends BaseMvpFragment implements IHomeView {
       navToLoginPage();
     }
 
+    homePresenter.initDeviceInfo();
+
     initRxBus();
   }
 
@@ -113,7 +115,7 @@ public class HomeFragment extends BaseMvpFragment implements IHomeView {
       //      new String[] { Manifest.permission.ACCESS_COARSE_LOCATION },
       //      WRITE_COARSE_LOCATION_REQUEST_CODE);//自定义的code
       //} else {
-      homePresenter.unDevice(deviceNo.split("\\*")[1]);
+      homePresenter.checkDevice(deviceNo.split("\\*")[1]);
       //}
     }
   }

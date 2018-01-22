@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/cell_height"
         pp:cell_edit_text_style="@style/PPEditTextPrimary"
-        pp:cell_hint="用户名"
+        pp:cell_hint="手机号"
         pp:cell_password="false"
         pp:cell_text_margin_left="0dp"
         pp:cell_text_margin_right="0dp" />
@@ -78,6 +78,38 @@
         pp:cell_password="true"
         pp:cell_text_margin_left="0dp"
         pp:cell_text_margin_right="0dp" />
+
+    <include layout="@layout/field_separator_margin_left" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+      <com.wearapay.scandemo.weight.CustomEditCell
+          android:id="@+id/cellVer"
+          style="@style/wpCellText"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="@dimen/cell_height"
+          pp:cell_edit_text_style="@style/PPEditTextPrimary"
+          pp:cell_hint="点击获取验证码"
+          pp:cell_password="false"
+          pp:cell_text_margin_left="0dp"
+          pp:cell_text_margin_right="0dp" />
+
+      <Button
+          android:id="@+id/btnVer"
+          android:layout_width="100dp"
+          android:text="获取验证码"
+          android:textColor="@color/white"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="5dp"
+          android:background="@drawable/btn_primary"
+          />
+    </LinearLayout>
+
+
 
     <include layout="@layout/field_separator" />
 

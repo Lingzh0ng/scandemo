@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import static com.wearapay.data.DConstant.DefaultSP;
 import static com.wearapay.data.DConstant.SP_login_status;
+import static com.wearapay.data.DConstant.SP_user_deviceNo;
 import static com.wearapay.data.DConstant.SP_user_taken;
 
 /**
@@ -52,5 +53,15 @@ public class LocalRepositoryImpl implements ILocalRepository {
     edit.putString(SP_user_taken, taken);
     edit.putBoolean(SP_login_status, true);
     edit.apply();
+  }
+
+  @Override public void saveDeviceNo(String deviceNo) {
+    SharedPreferences.Editor edit = sp.edit();
+    edit.putString(SP_user_deviceNo, deviceNo);
+    edit.apply();
+  }
+
+  @Override public String getDeviceNo() {
+    return sp.getString(SP_user_deviceNo, "");
   }
 }

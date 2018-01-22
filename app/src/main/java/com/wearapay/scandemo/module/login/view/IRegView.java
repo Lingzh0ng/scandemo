@@ -11,4 +11,10 @@ public interface IRegView extends IBaseRxView{
   void RegSuccess();
 
   void RegFailure();
+
+  void VerSuccess();
+
+  void VerFailure();
+
+  void UpdateTime(Long l);
 }

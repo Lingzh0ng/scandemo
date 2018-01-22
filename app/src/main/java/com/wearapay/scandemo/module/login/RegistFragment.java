@@ -3,6 +3,7 @@ package com.wearapay.scandemo.module.login;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.text.method.NumberKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +31,15 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
   @BindView(R.id.cellUserName) CustomEditCell cellUserName;
   @BindView(R.id.cellPassword) CustomEditCell cellPassword;
   @BindView(R.id.cellSurePassword) CustomEditCell cellSurePassword;
+  @BindView(R.id.cellVer) CustomEditCell cellVer;
   @BindView(R.id.btnLogin) Button btnLogin;
+  @BindView(R.id.btnVer) Button btnVer;
   Unbinder unbinder;
 
   private String pwd2;
   private String name;
   private String pwd;
+  private String verifyCode;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -71,24 +75,59 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
     cellPassword.setTextWatcher(watcher);
     cellUserName.setTextWatcher(watcher);
     cellSurePassword.setTextWatcher(watcher);
+    cellVer.setTextWatcher(watcher);
+    cellUserName.getEditText().setKeyListener(new NumberKeyListener() {
+      @Override
+      protected char[] getAcceptedChars() {
+        return new char[] { '1', '2', '3', '4', '5', '6', '7', '8','9', '0' };
+      }
+      @Override
+      public int getInputType() {
+        // TODO Auto-generated method stub
+        return android.text.InputType.TYPE_CLASS_PHONE;
+      }
+    });
+
+    btnVer.setEnabled(false);
+
+    btnVer.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        if (!TextUtils.isEmpty(name) && name.length() == 11) {
+          btnVer.setEnabled(false);
+          btnVer.setText("60秒");
+          regPresenter.requestRegisterCode(name);
+        }
+        //regPresenter.VerCodeTime();
+      }
+    });
   }
 
   private SimpleTextWatcher watcher = new SimpleTextWatcher() {
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
       name = cellUserName.getText();
+
       pwd = cellPassword.getText();
       pwd2 = cellSurePassword.getText();
+      verifyCode = cellVer.getText();
+      if (name.length() > 11) {
+        name = name.substring(0, 11);
+        cellUserName.setText(name);
+      } else if (name.length() == 11) {
+        cellUserName.getEditText().setSelection(name.length());
+      }
       updateButtonStatus();
     }
   };
 
   private void updateButtonStatus() {
-    btnLogin.setEnabled(!TextUtils.isEmpty(name)
+    btnLogin.setEnabled(!TextUtils.isEmpty(name) && name.length() == 11
         && !TextUtils.isEmpty(pwd)
         && pwd.length() >= 6
         && !TextUtils.isEmpty(pwd2)
-        && pwd2.length() >= 6);
+        && pwd2.length() >= 6&& !TextUtils.isEmpty(verifyCode));
+
+    btnVer.setEnabled(!TextUtils.isEmpty(name) && name.length() == 11);
   }
 
   @Override public void onDestroyView() {
@@ -100,7 +139,15 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
     if (!TextUtils.isEmpty(pwd) && !pwd.equals(pwd2)) {
       showMessage("两次密码输入不一致");
     } else {
-      regPresenter.reg(name, pwd);
+      //VerifyCodeRegister verifyCodeRegister = new VerifyCodeRegister();
+      //verifyCodeRegister.setLoginId(name);
+      //verifyCodeRegister.setNickname(name);
+      //verifyCodeRegister.setPassword1(pwd);
+      //verifyCodeRegister.setPassword2(pwd2);
+      //verifyCodeRegister.setVerifyCode(verifyCode);
+      //regPresenter.reg(verifyCodeRegister);
+
+      regPresenter.reg(name,pwd,verifyCode);
     }
   }
 
@@ -111,5 +158,25 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
 
   @Override public void RegFailure() {
 
+  }
+
+  @Override public void VerSuccess() {
+    showMessage("获取验证码成功");
+    regPresenter.VerCodeTime();
+  }
+
+  @Override public void VerFailure() {
+    showMessage("获取验证码失败");
+    btnVer.setText("获取验证码");
+    btnVer.setEnabled(true);
+  }
+
+  @Override public void UpdateTime(Long l) {
+    if (l < 60) {
+      btnVer.setText((60 - l )+ "秒");
+    } else {
+      btnVer.setText("获取验证码");
+      updateButtonStatus();
+    }
   }
 }

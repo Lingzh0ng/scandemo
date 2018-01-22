@@ -1,6 +1,7 @@
 package com.wearapay.data.repository;
 
 import com.wearapay.base.net.IRepository;
+import com.wearapay.data.bean.VerifyCodeRegister;
 import io.reactivex.Observable;
 
 /**
@@ -16,6 +17,14 @@ public interface IUserRepository extends IRepository {
       String password2);
 
   Observable<Void> logout(String token);
+
+  Observable<Void> verifyCodeRegister(VerifyCodeRegister verifyCodeRegister);
+
+  Observable<Void> requestRegisterCode(String number);
+
+  Observable<Void> verifyCodeRegister2(
+      String loginId, String password1,
+      String password2,  String nickname,String verifyCode);
 
   String test(String name, String pwd);
 }

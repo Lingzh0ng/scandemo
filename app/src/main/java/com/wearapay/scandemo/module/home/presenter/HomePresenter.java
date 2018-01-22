@@ -1,6 +1,7 @@
 package com.wearapay.scandemo.module.home.presenter;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -14,15 +15,15 @@ import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.wearapay.base.utils.L;
-import com.wearapay.data.bean.DeviceStatus;
 import com.wearapay.domain.devices.IDeviceMgmt;
 import com.wearapay.domain.user.IUserMgmt;
 import com.wearapay.net.BaseObserver;
+import com.wearapay.scandemo.App;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.module.home.view.IHomeView;
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -36,7 +37,7 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
 
   private final IUserMgmt userMgmt;
   private final IDeviceMgmt deviceMgmt;
-  private static final long INTERVAL_TIME = 4L;
+  private static final long INTERVAL_TIME = 5L;
   private static final long TIME_OUT = 60 * 1000L;
 
   private String reqId;
@@ -52,6 +53,52 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
     this.userMgmt = userMgmt;
     this.deviceMgmt = deviceMgmt;
     initLocationService();
+  }
+
+  //public void setHomeActivity(Activity activity){
+  //
+  //}
+
+  public void initDeviceInfo() {
+    String deviceNo = getDeviceNo();
+    if (!TextUtils.isEmpty(deviceNo)) {
+      checkDeviceLockStatus(deviceNo);
+    }
+  }
+
+  public void checkDeviceLockStatus(String deviceNo) {//返回值：1 - 锁定， 2 - 未锁 例子:
+    wrapBindUntil(deviceMgmt.queryRequest(deviceNo), FragmentEvent.DESTROY).subscribe(
+        new BaseObserver<Integer>(view, false) {
+          @Override public void onNext(Integer s) {
+            //reqId = s;
+            if (s == 0) {
+              //initQuery();
+              //view.showMessage("解锁成功");
+              System.out.println("checkDeviceLockStatus 设备已经被锁了");
+            } else if (s == 1) {
+              System.out.println("checkDeviceLockStatus 设备还在使用");
+              initQuery(deviceNo);
+            }
+          }
+
+          @Override public boolean isHideProgress() {
+            return false;
+          }
+
+          @Override public void onError(Throwable e) {
+            super.onError(e);
+            Activity homeActivity = App.app.getHomeActivity();
+            if (!homeActivity.isDestroyed()
+                && TextUtils.isEmpty(HomePresenter.this.deviceNo)
+                && deviceNo.equals(getDeviceNo()) && getLoginStatus()) {
+              checkDeviceLockStatus(deviceNo);
+            }
+          }
+        });
+  }
+
+  public String getDeviceNo() {
+    return userMgmt.getDeviceNo();
   }
 
   private void initLocationService() {
@@ -150,13 +197,44 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
     getLocation();
   }
 
+  public void checkDevice(String deviceNo) {
+    wrap(deviceMgmt.getDeviceStatus(deviceNo)).subscribe(new BaseObserver<Integer>(view, false) {
+      @Override public void onNext(Integer s) {
+        //reqId = s;
+        if (s == 0) {
+          //initQuery();
+          //view.showMessage("解锁成功");
+          userMgmt.saveDeviceNo(deviceNo);
+          unDevice(deviceNo);
+        } else {
+          view.dismissWaitProgress();
+          view.showMessage("checkDevice 设备已被使用");
+        }
+      }
+
+      @Override public boolean isHideProgress() {
+        return false;
+      }
+
+      @Override public void onError(Throwable e) {
+        super.onError(e);
+        view.hideProgress();
+        view.dismissWaitProgress();
+      }
+    });
+  }
+
   public void unDevice(String deviceNo, Location location) {
     wrap(deviceMgmt.unlock(deviceNo, location.getLatitude(), location.getLongitude())).subscribe(
-        new BaseObserver<String>(view) {
-          @Override public void onNext(String s) {
-            reqId = s;
-            if (!TextUtils.isEmpty(reqId)) {
-              initQuery();
+        new BaseObserver<Boolean>(view, false) {
+          @Override public void onNext(Boolean s) {
+            view.dismissWaitProgress();
+            //reqId = s;
+            if (s) {
+              //initQuery();
+              userMgmt.saveDeviceNo(deviceNo);
+              view.showMessage("解锁成功");
+              initQuery(deviceNo);
             } else {
               view.showMessage("解锁失败");
             }
@@ -169,77 +247,115 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
           @Override public void onError(Throwable e) {
             super.onError(e);
             view.hideProgress();
+            view.dismissWaitProgress();
           }
         });
   }
 
-  private void initQuery() {
+  private void initQuery(String deviceNo) {
+    try {
+    if (intervalObservable != null && disposable != null && !disposable.isDisposed()) {
+      disposable.dispose();
+      disposable = null;
+
+      intervalObservable = null;
+    }
     intervalObservable =
-        wrapBindUntil(Observable.interval(INTERVAL_TIME, TimeUnit.SECONDS, Schedulers.trampoline()),
+        wrapBindUntil(Observable.interval(INTERVAL_TIME, TimeUnit.SECONDS, Schedulers.computation()),
             FragmentEvent.DESTROY);
-
-    intervalObservable.subscribe(new Observer<Long>() {
-      @Override public void onSubscribe(Disposable d) {
-        disposable = d;
-      }
-
-      @Override public void onNext(Long aLong) {
+      Consumer subscriber = (Consumer<Long>) aLong -> {
         System.out.println("query number : " + aLong);
-        query(aLong);
-      }
+        if (!App.app.getHomeActivity().isDestroyed()
+            && !TextUtils.isEmpty(deviceNo)
+            && getLoginStatus()) {
+          query(deviceNo);
+        }else {
+          dospose();
+        }
+      };
+      disposable = intervalObservable.subscribe(subscriber, throwable -> {
+        dospose();
+        initQuery(deviceNo);
+      });
 
-      @Override public void onError(Throwable e) {
-        disposable.dispose();
-        initQuery();
-      }
-
-      @Override public void onComplete() {
-
-      }
-    });
+      //intervalObservable.subscribe(new Observer<Long>() {
+      //@Override public void onSubscribe(Disposable d) {
+      //  HomePresenter.this.disposable = d;
+      //}
+      //
+      //@Override public void onNext(Long aLong) {
+      //  System.out.println("query number : " + aLong);
+      //  if (!App.app.getHomeActivity().isDestroyed()
+      //      && !TextUtils.isEmpty(deviceNo)
+      //      && getLoginStatus()) {
+      //    query(deviceNo);
+      //  }else {
+      //    dospose();
+      //  }
+      //}
+      //
+      //@Override public void onError(Throwable e) {
+      //  dospose();
+      //  initQuery(deviceNo);
+      //}
+      //
+      //@Override public void onComplete() {
+      //
+      //}
+    //});
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
-  private void query(long number) {
-    if (TextUtils.isEmpty(reqId)) {
-      System.out.println("reqId is Empty");
+  private void query(String number) {
+    if (TextUtils.isEmpty(number)) {
+      System.out.println("number is Empty");
       return;
     }
-    wrapBindUntil(deviceMgmt.queryRequest(reqId), FragmentEvent.DESTROY).subscribe(deviceStatus -> {
-      if (deviceStatus != null && deviceStatus != DeviceStatus.SEND_WAIT_RESP) {
-        view.dismissWaitProgress();
-        if (disposable != null) {
-          disposable.dispose();
-          disposable = null;
-        }
+    wrapBindUntil(deviceMgmt.queryRequest(number), FragmentEvent.DESTROY).subscribe(deviceStatus -> {
+      if ( deviceStatus == 0) {
+        System.out.println("设备已锁");
+        view.showMessage("设备已锁");
+        dospose();
         if (intervalObservable != null) {
           intervalObservable = null;
         }
 
-        switch (deviceStatus) {
-          case NO_DEVICE:
-            view.showMessage("此设备不存在");
-            view.unDeviceFail();
-            break;
-          case SEND_ERROR:
-            view.showMessage("开启设备失败");
-            view.unDeviceFail();
-            break;
-          case RESP_OPEN:
-            view.showMessage("开启设备成功");
-            view.unDeviceSuccess();
-            break;
-          case RESP_ERROR:
-            view.showMessage("开启设备失败");
-            view.unDeviceFail();
-            break;
-          case DEVICE_OFFLINE:
-            view.showMessage("设备不在线,wait...");
-            //view.unDeviceFail();
-            break;
-          default:
-            break;
-        }
+        //switch (deviceStatus) {
+        //  case NO_DEVICE:
+        //    view.showMessage("此设备不存在");
+        //    view.unDeviceFail();
+        //    break;
+        //  case SEND_ERROR:
+        //    view.showMessage("开启设备失败");
+        //    view.unDeviceFail();
+        //    break;
+        //  case RESP_OPEN:
+        //    view.showMessage("开启设备成功");
+        //    view.unDeviceSuccess();
+        //    break;
+        //  case RESP_ERROR:
+        //    view.showMessage("开启设备失败");
+        //    view.unDeviceFail();
+        //    break;
+        //  case DEVICE_OFFLINE:
+        //    view.showMessage("设备不在线,wait...");
+        //    //view.unDeviceFail();
+        //    break;
+        //  default:
+        //    break;
+        //}
+      } else if (deviceStatus == 1) {
+        System.out.println("设备正在使用...");
       }
     });
+  }
+
+  private void dospose() {
+    if (disposable != null && !disposable.isDisposed()) {
+      disposable.dispose();
+      disposable = null;
+    }
   }
 }

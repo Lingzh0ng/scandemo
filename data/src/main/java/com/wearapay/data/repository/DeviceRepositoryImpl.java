@@ -1,7 +1,6 @@
 package com.wearapay.data.repository;
 
 import android.content.Context;
-import com.wearapay.data.bean.DeviceStatus;
 import com.wearapay.data.retorfit.RestDeviceService;
 import com.wearapay.net.BaseNetRepositoryModel;
 import io.reactivex.Observable;
@@ -16,12 +15,16 @@ public class DeviceRepositoryImpl  extends BaseNetRepositoryModel<RestDeviceServ
     super(context, retrofit);
   }
 
-  @Override public Observable<String> unlock(String token, String deviceNo) {
-    return getService().unlock(token, deviceNo);
+  @Override public Observable<Boolean> unlock(String token, String deviceNo,double latitude, double longitude) {
+    return getService().unlock(token, deviceNo,latitude,longitude);
   }
 
-  @Override public Observable<DeviceStatus> queryRequest(String token, String reqId) {
+  @Override public Observable<Integer> queryRequest(String token, String reqId) {
     return getService().queryRequest(token,reqId);
+  }
+
+  @Override public Observable<Integer> getDeviceStatus(String token, String reqId) {
+    return getService().getDeviceStatus(token,reqId);
   }
 
   @Override protected RestDeviceService initRetrofitClient(Context context) {

@@ -1,6 +1,5 @@
 package com.wearapay.domain.devices;
 
-import com.wearapay.data.bean.DeviceStatus;
 import io.reactivex.Observable;
 
 /**
@@ -8,7 +7,9 @@ import io.reactivex.Observable;
  */
 
 public interface IDeviceMgmt {
-  Observable<String> unlock(String deviceNo,double jd,double wd);
+  Observable<Boolean> unlock(String deviceNo,double latitude,double longitude);
 
-  Observable<DeviceStatus> queryRequest(String reqId);
+  Observable<Integer> queryRequest(String reqId);
+
+  Observable<Integer> getDeviceStatus(String reqId);
 }

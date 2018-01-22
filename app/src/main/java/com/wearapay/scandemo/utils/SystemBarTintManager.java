@@ -83,7 +83,7 @@ public class SystemBarTintManager {
      *
      * @param activity The host activity.
      */
-    @TargetApi(19)
+    @SuppressLint("ResourceType") @TargetApi(19)
     public SystemBarTintManager(Activity activity) {
 
         Window win = activity.getWindow();

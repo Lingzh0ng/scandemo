@@ -7,6 +7,7 @@ buildscript {
       //this
       url "https://oss.sonatype.org/content/repositories/snapshots"
     }
+    google()
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:3.0.0'
@@ -24,6 +25,7 @@ allprojects {
       //this
       url "https://oss.sonatype.org/content/repositories/snapshots"
     }
+    google()
   }
 }
 
@@ -38,8 +40,8 @@ ext {
   compileVersion = 26
   minSdk = 19
   targetSdk = 26
-  version_code = 1
-  version_name = "0.0.1"
+  version_code = 2
+  version_name = "0.0.2"
   supportVersion = "26.+"
 
 }
