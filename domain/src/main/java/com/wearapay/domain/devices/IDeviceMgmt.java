@@ -12,4 +12,8 @@ public interface IDeviceMgmt {
   Observable<Integer> queryRequest(String reqId);
 
   Observable<Integer> getDeviceStatus(String reqId);
+
+  Observable<Integer> accountStatus(String reqId);
+
+  Observable<Integer> getFailState( String reqId);
 }

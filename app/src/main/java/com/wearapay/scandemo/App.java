@@ -3,6 +3,7 @@ package com.wearapay.scandemo;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import com.wearapay.net.ApiManager;
 import com.wearapay.scandemo.dagger.ApplicationComponent;
 import com.wearapay.scandemo.dagger.ApplicationModule;
 import com.wearapay.scandemo.dagger.DaggerApplicationComponent;
@@ -63,7 +64,7 @@ public class App extends Application {
       }
     });
 
-    //ApiManager.get().init(this);
+    ApiManager.get().init(this);
   }
 
   public ApplicationComponent getComponent() {

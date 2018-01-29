@@ -8,6 +8,7 @@ import com.wearapay.data.dagger.UserDomainModule;
 import com.wearapay.data.dagger.UserRetrofitModule;
 import com.wearapay.domain.UserModule;
 import com.wearapay.scandemo.App;
+import com.wearapay.scandemo.BaseMvpActivity;
 import com.wearapay.scandemo.BaseMvpFragment;
 import com.wearapay.scandemo.MainActivity;
 import com.wearapay.scandemo.module.device.AddDeviceFragment;
@@ -28,6 +29,8 @@ import javax.inject.Singleton;
   void inject(App application);
 
   void inject(MainActivity mainActivity);
+
+  void inject(BaseMvpActivity mvpActivity);
 
   void inject(LoginFragment loginFragment);
 

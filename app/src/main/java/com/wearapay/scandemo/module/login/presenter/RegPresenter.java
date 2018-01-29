@@ -109,7 +109,7 @@ public class RegPresenter extends BaseFragmentPresenter<IRegView> {
         System.out.println("query number : " + aLong);
        view.UpdateTime(aLong);
        if (aLong == 60) {
-         disposable.isDisposed();
+         disposable.dispose();
          disposable = null;
        }
       }

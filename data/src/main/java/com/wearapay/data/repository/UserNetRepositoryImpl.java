@@ -26,30 +26,30 @@ import retrofit2.Retrofit;
     return getService().login(name, pwd);
   }
 
-  @Override public Observable<Void> register(String loginId, String password1, String password2,
+  @Override public Observable<Boolean> register(String loginId, String password1, String password2,
       String nickname) {
     return getService().register(loginId, password1, password2, nickname);
   }
 
-  @Override public Observable<Void> changePassword(String token, String password, String password1,
+  @Override public Observable<Boolean> changePassword(String token, String password, String password1,
       String password2) {
     return getService().changePassword(token, password, password1, password2);
   }
 
-  @Override public Observable<Void> logout(String token) {
+  @Override public Observable<Boolean> logout(String token) {
     return getService().logout(token);
   }
 
-  @Override public Observable<Void> verifyCodeRegister(VerifyCodeRegister verifyCodeRegister) {
+  @Override public Observable<Boolean> verifyCodeRegister(VerifyCodeRegister verifyCodeRegister) {
     return getService().verifyCodeRegister(verifyCodeRegister);
   }
 
-  @Override public Observable<Void> requestRegisterCode(String number) {
+  @Override public Observable<Boolean> requestRegisterCode(String number) {
     return getService().requestRegisterCode(number);
   }
 
   @Override
-  public Observable<Void> verifyCodeRegister2(String loginId, String password1, String password2,
+  public Observable<Boolean> verifyCodeRegister2(String loginId, String password1, String password2,
       String nickname, String verifyCode) {
     return getService().verifyCodeRegister2(loginId,password1,password2,nickname,verifyCode);
   }

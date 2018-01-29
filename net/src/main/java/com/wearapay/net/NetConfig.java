@@ -6,7 +6,7 @@ package com.wearapay.net;
 
 public class NetConfig {
   public static final long CONNECT_TIME_OUT = 30;
-  public static final long READ_TIME_OUT = 180;
+  public static final long READ_TIME_OUT = 30;
   public static final long WRITE_TIME_OUT = 30;
 
 }

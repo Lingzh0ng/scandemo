@@ -29,7 +29,7 @@ public class ApiManager {
   public void init(Context appContext) {
     this.appContext = appContext;
     testNetRepositoryModel = new TestNetRepositoryModel(appContext,
-        retrofitManager.getRetrofit(appContext, "http://szt.alxfj.com:808/app/"));
+        retrofitManager.getRetrofit(appContext, "https://58.246.226.171:6000/"));
   }
 
   public TestNetService getTestNetRepositoryModel() {

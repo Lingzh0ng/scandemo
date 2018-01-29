@@ -18,6 +18,7 @@ import com.wearapay.base.utils.L;
 import com.wearapay.domain.devices.IDeviceMgmt;
 import com.wearapay.domain.user.IUserMgmt;
 import com.wearapay.net.BaseObserver;
+import com.wearapay.net.Exception.ApiException;
 import com.wearapay.scandemo.App;
 import com.wearapay.scandemo.base.mvp.BaseFragmentPresenter;
 import com.wearapay.scandemo.module.home.view.IHomeView;
@@ -62,22 +63,24 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
   public void initDeviceInfo() {
     String deviceNo = getDeviceNo();
     if (!TextUtils.isEmpty(deviceNo)) {
-      checkDeviceLockStatus(deviceNo);
+      checkDeviceAccountStatus(deviceNo);
     }
   }
 
-  public void checkDeviceLockStatus(String deviceNo) {//返回值：1 - 锁定， 2 - 未锁 例子:
-    wrapBindUntil(deviceMgmt.queryRequest(deviceNo), FragmentEvent.DESTROY).subscribe(
+  public void checkDeviceAccountStatus(String deviceNo) {//返回值：1 - 锁定， 2 - 未锁 例子:
+    wrapBindUntil(deviceMgmt.accountStatus(deviceNo), FragmentEvent.DESTROY).subscribe(
         new BaseObserver<Integer>(view, false) {
           @Override public void onNext(Integer s) {
             //reqId = s;
-            if (s == 0) {
+            if (s == 1) {
               //initQuery();
               //view.showMessage("解锁成功");
-              System.out.println("checkDeviceLockStatus 设备已经被锁了");
-            } else if (s == 1) {
-              System.out.println("checkDeviceLockStatus 设备还在使用");
+              System.out.println("checkDeviceAccountStatus 设备已经结算了");
+            } else if (s == 2) {
+              System.out.println("checkDeviceAccountStatus 设备还在使用");
               initQuery(deviceNo);
+            }else if (s == 0) {
+              System.out.println("checkDeviceAccountStatus 设备查询状态失败");
             }
           }
 
@@ -91,7 +94,7 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
             if (!homeActivity.isDestroyed()
                 && TextUtils.isEmpty(HomePresenter.this.deviceNo)
                 && deviceNo.equals(getDeviceNo()) && getLoginStatus()) {
-              checkDeviceLockStatus(deviceNo);
+              checkDeviceAccountStatus(deviceNo);
             }
           }
         });
@@ -193,22 +196,25 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
 
   public void unDevice(String deviceNo) {
     this.deviceNo = deviceNo;
-    view.showWaitProgress();
     getLocation();
   }
 
   public void checkDevice(String deviceNo) {
+    view.showWaitProgress();
     wrap(deviceMgmt.getDeviceStatus(deviceNo)).subscribe(new BaseObserver<Integer>(view, false) {
       @Override public void onNext(Integer s) {
         //reqId = s;
-        if (s == 0) {
-          //initQuery();
-          //view.showMessage("解锁成功");
-          userMgmt.saveDeviceNo(deviceNo);
+        if (s == 1) {
+
           unDevice(deviceNo);
+        } else if(s == 2){
+          view.dismissWaitProgress();
+          view.showMessage("设备正在使用中，请稍后重试");
+          view.unDeviceFail();
         } else {
           view.dismissWaitProgress();
-          view.showMessage("checkDevice 设备已被使用");
+          view.showMessage("系统忙，请重试");
+          view.unDeviceFail();
         }
       }
 
@@ -220,12 +226,27 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
         super.onError(e);
         view.hideProgress();
         view.dismissWaitProgress();
+        view.unDeviceFail();
       }
     });
   }
 
   public void unDevice(String deviceNo, Location location) {
-    wrap(deviceMgmt.unlock(deviceNo, location.getLatitude(), location.getLongitude())).subscribe(
+    wrap(deviceMgmt.getFailState(deviceNo))/*.flatMap(integer -> {
+      if (integer == 1) {
+        return wrap(deviceMgmt.getFailState(deviceNo));
+      } else {
+        return Observable.error(new ApiException("设备正在使用中，请稍后重试"));
+      }
+    })*/.flatMap(integer -> {
+      if (integer == 1) {
+        return wrap(deviceMgmt.unlock(deviceNo, location.getLatitude(), location.getLongitude()));
+      } else if (integer == 2){
+        return Observable.error(new ApiException("设备故障，解锁失败，请稍后重试"));
+      }else {
+        return Observable.error(new ApiException("系统忙，请重试"));
+      }
+    }).subscribe(
         new BaseObserver<Boolean>(view, false) {
           @Override public void onNext(Boolean s) {
             view.dismissWaitProgress();
@@ -234,9 +255,11 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
               //initQuery();
               userMgmt.saveDeviceNo(deviceNo);
               view.showMessage("解锁成功");
+              view.unDeviceSuccess();
               initQuery(deviceNo);
             } else {
               view.showMessage("解锁失败");
+              view.unDeviceFail();
             }
           }
 
@@ -244,12 +267,22 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
             return false;
           }
 
+          @Override protected void handlerError(Throwable e) {
+            super.handlerError(e);
+            if (e instanceof ApiException) {
+              view.showMessage(e.getMessage());
+            }
+          }
+
           @Override public void onError(Throwable e) {
             super.onError(e);
             view.hideProgress();
             view.dismissWaitProgress();
+            view.unDeviceFail();
           }
         });
+
+    //wrap(deviceMgmt.unlock(deviceNo, location.getLatitude(), location.getLongitude()))
   }
 
   private void initQuery(String deviceNo) {
@@ -305,6 +338,7 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
     //});
     } catch (Exception e) {
       e.printStackTrace();
+      view.dismissWaitProgress();
     }
   }
 
@@ -313,13 +347,17 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
       System.out.println("number is Empty");
       return;
     }
-    wrapBindUntil(deviceMgmt.queryRequest(number), FragmentEvent.DESTROY).subscribe(deviceStatus -> {
-      if ( deviceStatus == 0) {
-        System.out.println("设备已锁");
-        view.showMessage("设备已锁");
+    wrapBindUntil(deviceMgmt.accountStatus(number), FragmentEvent.DESTROY).subscribe(deviceStatus -> {
+      if ( deviceStatus == 1 ) {
+        System.out.println("设备已结算");
+        userMgmt.saveDeviceNo("");
+
         dospose();
         if (intervalObservable != null) {
           intervalObservable = null;
+          view.showMessage("设备SN:"+number+" 已结算");
+          view.unDeviceFail();
+          deviceNo = null;
         }
 
         //switch (deviceStatus) {
@@ -346,8 +384,10 @@ public class HomePresenter extends BaseFragmentPresenter<IHomeView> {
         //  default:
         //    break;
         //}
-      } else if (deviceStatus == 1) {
-        System.out.println("设备正在使用...");
+      } else if (deviceStatus == 2) {
+        System.out.println("设备正在使用..." + deviceStatus);
+      }else {
+        System.out.println("设备状态.." + deviceStatus);
       }
     });
   }

@@ -40,6 +40,7 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
   private String name;
   private String pwd;
   private String verifyCode;
+  private boolean isVerifyCode = true;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -96,6 +97,7 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
           btnVer.setEnabled(false);
           btnVer.setText("60秒");
           regPresenter.requestRegisterCode(name);
+          updateButtonStatus(false);
         }
         //regPresenter.VerCodeTime();
       }
@@ -121,13 +123,17 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
   };
 
   private void updateButtonStatus() {
+   updateButtonStatus(true);
+  }
+
+  private void updateButtonStatus(boolean verEnabled) {
     btnLogin.setEnabled(!TextUtils.isEmpty(name) && name.length() == 11
         && !TextUtils.isEmpty(pwd)
         && pwd.length() >= 6
         && !TextUtils.isEmpty(pwd2)
         && pwd2.length() >= 6&& !TextUtils.isEmpty(verifyCode));
 
-    btnVer.setEnabled(!TextUtils.isEmpty(name) && name.length() == 11);
+    btnVer.setEnabled(!TextUtils.isEmpty(name) && name.length() == 11 && verEnabled && isVerifyCode);
   }
 
   @Override public void onDestroyView() {
@@ -161,11 +167,13 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
   }
 
   @Override public void VerSuccess() {
+    isVerifyCode = false;
     showMessage("获取验证码成功");
     regPresenter.VerCodeTime();
   }
 
   @Override public void VerFailure() {
+    isVerifyCode = true;
     showMessage("获取验证码失败");
     btnVer.setText("获取验证码");
     btnVer.setEnabled(true);
@@ -174,9 +182,12 @@ public class RegistFragment extends BaseMvpFragment implements IRegView {
   @Override public void UpdateTime(Long l) {
     if (l < 60) {
       btnVer.setText((60 - l )+ "秒");
+      isVerifyCode = false;
+      updateButtonStatus(false);
     } else {
+      isVerifyCode = true;
       btnVer.setText("获取验证码");
-      updateButtonStatus();
+      updateButtonStatus(true);
     }
   }
 }

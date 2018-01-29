@@ -37,13 +37,7 @@ public class UserMgmtImpl implements IUserMgmt {
   }
 
   @Override public Observable<Boolean> logout() {
-    return iUserRepository.logout(iLocalRepository.getUserTaken())
-        .flatMap(new Function<Void, ObservableSource<Boolean>>() {
-          @Override public ObservableSource<Boolean> apply(Void aVoid) throws Exception {
-            logoutLocal();
-            return Observable.just(true);
-          }
-        });
+    return iUserRepository.logout(iLocalRepository.getUserTaken());
   }
 
   @Override public void logoutLocal() {
@@ -66,48 +60,27 @@ public class UserMgmtImpl implements IUserMgmt {
 
   @Override public Observable<Boolean> register(String loginId, String password1, String password2,
       String nickname) {
-    return iUserRepository.register(loginId, password1, password2, nickname)
-        .flatMap(new Function<Void, ObservableSource<Boolean>>() {
-          @Override public ObservableSource<Boolean> apply(Void aVoid) throws Exception {
-            return Observable.just(true);
-          }
-        });
+    return iUserRepository.register(loginId, password1, password2, nickname);
   }
 
   @Override
   public Observable<Boolean> changePassword(String password, String password1, String password2) {
     return iUserRepository.changePassword(iLocalRepository.getUserTaken(), password, password1,
-        password2).flatMap(new Function<Void, ObservableSource<Boolean>>() {
-      @Override public ObservableSource<Boolean> apply(Void aVoid) throws Exception {
-        return Observable.just(true);
-      }
-    });
+        password2);
   }
 
   @Override public Observable<Boolean> verifyCodeRegister(VerifyCodeRegister verifyCodeRegister) {
-    return iUserRepository.verifyCodeRegister(verifyCodeRegister).flatMap(new Function<Void, ObservableSource<Boolean>>() {
-      @Override public ObservableSource<Boolean> apply(Void aVoid) throws Exception {
-        return Observable.just(true);
-      }
-    });
+    return iUserRepository.verifyCodeRegister(verifyCodeRegister);
   }
 
   @Override public Observable<Boolean> requestRegisterCode(String number) {
-    return iUserRepository.requestRegisterCode(number).flatMap(new Function<Void, ObservableSource<Boolean>>() {
-      @Override public ObservableSource<Boolean> apply(Void aVoid) throws Exception {
-        return Observable.just(true);
-      }
-    });
+    return iUserRepository.requestRegisterCode(number);
   }
 
   @Override
   public Observable<Boolean> verifyCodeRegister2(String loginId, String password1, String password2,
       String nickname, String verifyCode) {
-    return iUserRepository.verifyCodeRegister2(loginId,password1,password2,nickname,verifyCode).flatMap(new Function<Void, ObservableSource<Boolean>>() {
-      @Override public ObservableSource<Boolean> apply(Void aVoid) throws Exception {
-        return Observable.just(true);
-      }
-    });
+    return iUserRepository.verifyCodeRegister2(loginId,password1,password2,nickname,verifyCode);
   }
 
   @Override public void saveDeviceNo(String deviceNo) {

@@ -9,8 +9,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.wearapay.base.mvp.BasePresenter;
+import com.wearapay.domain.user.IUserMgmt;
 import com.wearapay.scandemo.base.BaseActivity;
 import com.wearapay.scandemo.base.BaseFragment;
 import com.wearapay.scandemo.base.mvp.IBaseRxView;
@@ -33,11 +33,14 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseRxVie
     private SDProgressDialog progressDialog;
     protected boolean canBack = true;
     AppBarLayout appbar;
+    private IUserMgmt iUserMgmt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 //        color = getIntent().getIntExtra(AppConstant.STATUS_COLOR, color);
 //    color = getResources().getColor(colorId);
+
+        App.app.getComponent().inject(this);
         canBack = getIntent().getBooleanExtra(AppConstant.CAN_BACK, true);
         String title = getIntent().getStringExtra(AppConstant.TITLE);
         super.onCreate(savedInstanceState);
@@ -160,6 +163,7 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseRxVie
     }
 
     @Override public void navToLoginPage() {
+        iUserMgmt.logoutLocal();
         Bundle bundle = ActivityUtils.getBundle(R.color.test_color, "登录", false, true);
         ActivityUtils.startFragment(this, AppConstant.FragmentType.Login, bundle);
     }

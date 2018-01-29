@@ -29,4 +29,12 @@ public class DeviceMgmtImpl implements IDeviceMgmt {
   @Override public Observable<Integer> getDeviceStatus(String reqId) {
     return iDeviceRepository.getDeviceStatus(iLocalRepository.getUserTaken(),reqId);
   }
+
+  @Override public Observable<Integer> accountStatus(String reqId) {
+    return iDeviceRepository.accountStatus(iLocalRepository.getUserTaken(),reqId);
+  }
+
+  @Override public Observable<Integer> getFailState( String reqId) {
+    return iDeviceRepository.getFailState(iLocalRepository.getUserTaken(),reqId);
+  }
 }

@@ -11,18 +11,18 @@ import io.reactivex.Observable;
 public interface IUserRepository extends IRepository {
   Observable<String> login(String loginId, String password);
 
-  Observable<Void> register(String loginId, String password1, String password2, String nickname);
+  Observable<Boolean> register(String loginId, String password1, String password2, String nickname);
 
-  Observable<Void> changePassword(String token, String password, String password1,
+  Observable<Boolean> changePassword(String token, String password, String password1,
       String password2);
 
-  Observable<Void> logout(String token);
+  Observable<Boolean> logout(String token);
 
-  Observable<Void> verifyCodeRegister(VerifyCodeRegister verifyCodeRegister);
+  Observable<Boolean> verifyCodeRegister(VerifyCodeRegister verifyCodeRegister);
 
-  Observable<Void> requestRegisterCode(String number);
+  Observable<Boolean> requestRegisterCode(String number);
 
-  Observable<Void> verifyCodeRegister2(
+  Observable<Boolean> verifyCodeRegister2(
       String loginId, String password1,
       String password2,  String nickname,String verifyCode);
 

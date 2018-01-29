@@ -16,6 +16,7 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by lyz on 2017/10/11.
@@ -37,8 +38,8 @@ public class RetrofitManager {
     public Retrofit getRetrofit(Context context, String baseUrl) {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
             .client(getOkHttpClient(context, new DefaultHandle()))
-            //.addConverterFactory(GsonConverterFactory.create(new Gson()))
-            .addConverterFactory(PPRestConverterFactory.create(new Gson()))
+            .addConverterFactory(GsonConverterFactory.create(new Gson()))
+            //.addConverterFactory(PPRestConverterFactory.create(new Gson()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();
         return retrofit;

@@ -6,7 +6,8 @@ package com.wearapay.data;
 
 public interface DConstant {
   String BASE_URL = "http://gank.io/api/";
-  String BASE_URL_1 = "http://ci.wearapay.cn:8392/"+ "devicelock/";
+  //String BASE_URL_1 = "http://ci.wearapay.cn:8392/"+ "devicelock/";
+  String BASE_URL_1 = "http://106.14.145.21:8392/"+ "devicelock/";
   String DefaultHandle = "DefaultHandle";
 
   String DefaultSP = "Default_SP";

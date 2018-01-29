@@ -38,7 +38,7 @@ final class PPRestResponseBodyConverter<T> implements Converter<ResponseBody, T>
     BaseBean result = gson.fromJson(responseStr, BaseBean.class);
     if (result.isSuccess()) {
       if (result.getData() == null) {
-        return null;
+        return (T) Boolean.TRUE;
       }
       return gson.fromJson(gson.toJson(result.getData()), type);
     } else {

@@ -45,12 +45,12 @@ public abstract class BaseObserver<T> implements Observer<T> {
       return;
     } else if (e instanceof java.net.ConnectException
         || e instanceof java.net.SocketTimeoutException) {
-      view.showMessage("网络错误");
+      view.showMessage("无法连接服务器");
     } else if (e instanceof PPCodedException) {
       PPCodedException codedException = (PPCodedException) e;
       view.showMessage(codedException.getMessage());
     } else if (e instanceof HttpException || e instanceof SocketTimeoutException) {
-      view.showMessage("网络错误");
+      view.showMessage("无法连接服务器");
     } else {
       System.out.println("sever error");
       handlerError(e);

@@ -20,4 +20,12 @@ public interface RestDeviceService {
   @FormUrlEncoded
   @POST("api/device/getLockState2") Observable<Integer> queryRequest(@Field("token") String token,
       @Field("deviceNo") String reqId);
+
+  @FormUrlEncoded
+  @POST("api/device/accountStatus") Observable<Integer> accountStatus(@Field("token") String token,
+      @Field("deviceNo") String reqId);
+
+  @FormUrlEncoded
+  @POST("api/device/getFailState") Observable<Integer> getFailState(@Field("token") String token,
+      @Field("deviceNo") String reqId);
 }

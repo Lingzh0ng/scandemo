@@ -12,28 +12,28 @@ import retrofit2.http.POST;
  */
 
 public interface RestUserService {
-  @FormUrlEncoded @POST("api/user/register") Observable<Void> register(
+  @FormUrlEncoded @POST("api/user/register") Observable<Boolean> register(
       @Field("loginId") String loginId, @Field("password1") String password1,
       @Field("password2") String password2, @Field("nickname") String nickname);
 
   @FormUrlEncoded @POST("api/user/login") Observable<String> login(
       @Field("loginId") String loginId, @Field("password") String password);
 
-  @FormUrlEncoded @POST("api/user/changePassword") Observable<Void> changePassword(
+  @FormUrlEncoded @POST("api/user/changePassword") Observable<Boolean> changePassword(
       @Field("token") String token, @Field("password") String password,
       @Field("password1") String password1, @Field("password2") String password2);
 
-  @FormUrlEncoded @POST("api/user/logout") Observable<Void> logout(
+  @FormUrlEncoded @POST("api/user/logout") Observable<Boolean> logout(
       @Field("token") String token);
 
-  @POST("api/user/register2") Observable<Void> verifyCodeRegister(
+  @POST("api/user/register2") Observable<Boolean> verifyCodeRegister(
       @Body VerifyCodeRegister verifyCodeRegister);
 
   @FormUrlEncoded
-  @POST("api/user/register2") Observable<Void> verifyCodeRegister2(
+  @POST("api/user/register2") Observable<Boolean> verifyCodeRegister2(
       @Field("loginId") String loginId, @Field("password1") String password1,
       @Field("password2") String password2, @Field("nickname") String nickname,@Field("verifyCode") String verifyCode);
 
-  @FormUrlEncoded @POST("api/user/requestRegisterCode") Observable<Void> requestRegisterCode(
+  @FormUrlEncoded @POST("api/user/requestRegisterCode") Observable<Boolean> requestRegisterCode(
       @Field("mobile") String mobile);
 }

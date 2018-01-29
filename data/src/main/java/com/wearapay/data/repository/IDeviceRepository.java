@@ -13,4 +13,8 @@ public interface IDeviceRepository extends IRepository {
   Observable<Integer> queryRequest(String token, String reqId);
 
   Observable<Integer> getDeviceStatus(String token, String reqId);
+
+  Observable<Integer> accountStatus(String token, String reqId);
+
+  Observable<Integer> getFailState(String token, String reqId);
 }

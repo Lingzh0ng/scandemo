@@ -27,6 +27,14 @@ public class DeviceRepositoryImpl  extends BaseNetRepositoryModel<RestDeviceServ
     return getService().getDeviceStatus(token,reqId);
   }
 
+  @Override public Observable<Integer> accountStatus(String token, String reqId) {
+    return getService().accountStatus(token,reqId);
+  }
+
+  @Override public Observable<Integer> getFailState(String token, String reqId) {
+    return getService().getFailState(token,reqId);
+  }
+
   @Override protected RestDeviceService initRetrofitClient(Context context) {
     return retrofit.create(getServiceType());
   }
